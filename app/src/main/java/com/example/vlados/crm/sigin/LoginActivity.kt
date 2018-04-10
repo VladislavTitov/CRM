@@ -143,8 +143,8 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
 
     }
 
-    override fun goToMainActivity() {
-        startActivity(MainActivityIntent())
+    override fun goToMainActivity(role: String) {
+        startActivity(MainActivityIntent(role))
         finish()
     }
 

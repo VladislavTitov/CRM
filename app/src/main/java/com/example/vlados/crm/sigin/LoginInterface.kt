@@ -7,6 +7,6 @@ import com.arellomobile.mvp.MvpView
  */
 interface LoginInterface : MvpView{
 
-    fun goToMainActivity()
+    fun goToMainActivity(role: String)
 
 }

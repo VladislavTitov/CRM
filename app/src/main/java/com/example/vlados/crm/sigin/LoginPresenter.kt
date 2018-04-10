@@ -2,6 +2,7 @@ package com.example.vlados.crm.sigin
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.example.vlados.crm.SHOP_ADMIN
 import io.reactivex.disposables.Disposable
 
 /**
@@ -16,7 +17,7 @@ class LoginPresenter : MvpPresenter<LoginInterface>(){
         /*subscription = ApiMethods.post.login()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()*/ //TODO implement retrieving and saving credentials
-        viewState.goToMainActivity()
+        viewState.goToMainActivity(SHOP_ADMIN)
     }
 
     override fun onDestroy() {
