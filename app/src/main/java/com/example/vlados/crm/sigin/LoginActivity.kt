@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.example.vlados.crm.MainActivityIntent
 
 import com.example.vlados.crm.R
 import com.example.vlados.crm.utils.afterTextChanged
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : MvpAppCompatActivity(), LoginInterface{
 
     @InjectPresenter
-    private lateinit var presenter : LoginPresenter
+    lateinit var presenter : LoginPresenter
 
     private var loginText : String = ""
     private var passwordText : String = ""
@@ -140,6 +141,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
                     }
                 })
 
+    }
+
+    override fun goToMainActivity() {
+        startActivity(MainActivityIntent())
+        finish()
     }
 
 }
