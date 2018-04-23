@@ -2,9 +2,6 @@ package com.example.vlados.crm.sigin
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.support.v7.app.AppCompatActivity
-import android.app.LoaderManager.LoaderCallbacks
-import android.database.Cursor
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -12,11 +9,9 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.example.vlados.crm.MainActivityIntent
-
 import com.example.vlados.crm.R
+import com.example.vlados.crm.main.NavigationActivity
 import com.example.vlados.crm.utils.afterTextChanged
-
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -29,6 +24,8 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
 
     private var loginText : String = ""
     private var passwordText : String = ""
+
+    private val loadingKey = "loading_key"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +59,13 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
             }
         }
 
+        savedInstanceState?.getBoolean(loadingKey, false)?.let { showProgress(it) }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putBoolean(loadingKey, login_progress.visibility == View.VISIBLE)
+        super.onSaveInstanceState(outState)
     }
 
 
@@ -144,7 +148,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
     }
 
     override fun goToMainActivity(role: String) {
-        startActivity(MainActivityIntent(role))
+        startActivity(NavigationActivity(role))
         finish()
     }
 
