@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">CRM</string>
+
+    <!--Roles-->
+    <string name="cashier">Cashier</string>
+    <string name="shop_admin">Administrator of shop</string>
+    <string name="net_admin">Administrator of net</string>
+
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -14,4 +20,18 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!--Navigation view staff strings-->
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <!--Titles-->
+    <string name="title_honor_board">Honor board</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_sales">Sales</string>
+    <string name="title_accounts">Accounts</string>
+    <string name="title_reports">Reports</string>
+    <string name="title_goods_and_shops">Goods and shops</string>
 </resources>
