@@ -23,6 +23,11 @@
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <provider
+            android:authorities="com.example.vlados.crm"
+            android:name=".db.CRMContentProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
