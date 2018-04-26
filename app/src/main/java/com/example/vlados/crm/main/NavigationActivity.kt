@@ -12,6 +12,8 @@ import android.view.View
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.vlados.crm.*
+import com.example.vlados.crm.accounts.ui.Account
+import com.example.vlados.crm.accounts.ui.AccountFragment
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.goodsandshops.GoodsAndShopsHolder
 import com.example.vlados.crm.goodsandshops.GoodsShopsHolder
@@ -80,7 +82,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
 
             }
             R.id.nav_accounts -> {
-
+                showAccounts()
             }
             R.id.nav_reports -> {
 
@@ -105,6 +107,19 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
                 .replace(R.id.container, fragment, tag)
                 .commit()
         toolbar.title = getString(R.string.title_honor_board)
+    }
+
+    private fun showAccounts() {
+        val tag = AccountFragment::class.java.name
+        var fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null && fragment.isAdded) {
+            return
+        }
+        fragment = Account()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, tag)
+                .commit()
+        toolbar.title = getString(R.string.title_accounts)
     }
 
     private fun showGoodsAndShops() {
