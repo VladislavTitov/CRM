@@ -14,8 +14,9 @@
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:tabGravity="fill"
-        app:tabTextColor="#FFF"
-        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:tabTextColor="@color/grey_text_color_with_70_oppacity"
+        app:tabSelectedTextColor="@color/grey_text_color"
         />
 
 

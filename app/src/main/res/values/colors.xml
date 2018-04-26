@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#C7B7AD</color>
     <color name="colorPrimaryDark">#4E2C18</color>
     <color name="colorAccent">#FF9052</color>
-    <color name="brown_text_color">#4E2C18</color>
+    <color name="blue_text_color">#233040</color>
+    <color name="grey_text_color">#343F4B</color>
+    <color name="grey_text_color_with_70_oppacity">#b3343F4B</color>
+    <color name="tab_indicator_color">#8190A5</color>
+    <color name="beige">#CBB9AF</color>
+
+    <color name="colorPrimaryDark_with_70">#b34E2C18</color>
+    <color name="colorPrimaryDark_with_85">#D94E2C18</color>
+    <color name="app_orange_color">#E39462</color>
 </resources>

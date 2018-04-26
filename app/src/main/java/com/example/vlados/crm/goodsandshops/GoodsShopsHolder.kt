@@ -16,7 +16,7 @@ import com.example.vlados.crm.goodsandshops.shops.getShopsFragment
 import kotlinx.android.synthetic.main.fragment_goods_and_shops_holder.*
 import java.util.*
 
-fun Context.GoodsAndShopsHolder() : Fragment {
+fun Context.GoodsAndShopsHolder(): Fragment {
     val holder = GoodsShopsHolder()
     return holder
 }

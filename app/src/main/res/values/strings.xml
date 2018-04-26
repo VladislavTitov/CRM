@@ -50,5 +50,6 @@
     <string name="job_label">Статус</string>
     <string name="edit_label">Изменить</string>
     <string name="cancel_label">Отмена</string>
+    <string name="button_main_label">Главная</string>
 
 </resources>

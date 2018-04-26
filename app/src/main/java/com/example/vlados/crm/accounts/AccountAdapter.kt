@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.example.vlados.crm.R
 import com.example.vlados.crm.accounts.data.Account
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.account_instance.*
+import kotlinx.android.synthetic.main.item_account.*
 
 /**
  * Created by Daria Popova on 25.04.18.
@@ -18,7 +18,7 @@ class AccountAdapter(val itemClickListener: OnItemClickListener<Account>,
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AccountHolder {
         val view = LayoutInflater.from(parent?.context)
-                .inflate(R.layout.account_instance, parent, false)
+                .inflate(R.layout.item_account, parent, false)
 
         return AccountHolder(view)
     }
