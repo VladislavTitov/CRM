@@ -116,20 +116,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/edit_margin" />
-
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<Button-->
-                    <!--android:id="@+id/account_edit_button"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentEnd="true"-->
-                    <!--android:layout_marginTop="8dp"-->
-                    <!--android:background="@color/colorAccent"-->
-                    <!--android:text="@string/edit_label" />-->
-            <!--</RelativeLayout>-->
         </LinearLayout>
     </ScrollView>
 

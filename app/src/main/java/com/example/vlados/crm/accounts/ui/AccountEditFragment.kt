@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.example.vlados.crm.R
 import com.example.vlados.crm.accounts.data.Account
+import com.example.vlados.crm.accounts.mockCompanies
+import com.example.vlados.crm.accounts.mockJobs
 import com.example.vlados.crm.common.Navigator
 import kotlinx.android.synthetic.main.fragment_account_edit.view.*
 
@@ -62,7 +65,18 @@ class AccountEditFragment : MvpAppCompatDialogFragment() {
         view.accountEditLogin.setText(account?.login)
         view.accountEditPassword.setText(account?.password)
         view.accountEditStore.setText(account?.store)
+
+        val companyAdapter = ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_dropdown_item, mockCompanies)
+        view.accountEditCompany.adapter = companyAdapter
+        view.accountEditCompany.setSelection(mockCompanies.indexOf(account?.company))
+
+        val jobAdapter = ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_dropdown_item, mockJobs)
+        view.accountEditJob.adapter = jobAdapter
+        view.accountEditJob.setSelection(mockJobs.indexOf(account?.job))
     }
+
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 

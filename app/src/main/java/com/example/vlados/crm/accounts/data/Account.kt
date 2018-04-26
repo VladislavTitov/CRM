@@ -2,20 +2,22 @@ package com.example.vlados.crm.accounts.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.vlados.crm.accounts.getRandomCompany
+import com.example.vlados.crm.accounts.getRandomJob
 import java.util.*
 
 /**
  * Created by Daria Popova on 25.04.18.
  */
 //todo remove random
-data class Account(var company: String = "H&M",
+data class Account(var company: String = getRandomCompany(),
                    var store: String = UUID.randomUUID().toString(),
                    var address: String = UUID.randomUUID().toString(),
                    var login: String = UUID.randomUUID().toString(),
                    var password: String = UUID.randomUUID().toString(),
                    var name: String = UUID.randomUUID().toString(),
                    var surname: String = UUID.randomUUID().toString(),
-                   var job: String = "Кассир") : Parcelable {
+                   var job: String = getRandomJob()) : Parcelable {
 
     public fun getFullName(): String {
         return name + " " + surname;
