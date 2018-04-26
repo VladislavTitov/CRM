@@ -37,7 +37,7 @@ class GoodsShopsHolder : MvpAppCompatFragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        pager.adapter = GoodsShopsAdapter(fragmentManager)
+        pager.adapter = GoodsShopsAdapter(childFragmentManager)
         tabs.setupWithViewPager(pager)
     }
 
