@@ -8,10 +8,13 @@ import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.vlados.crm.*
 import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.goodsandshops.GoodsAndShopsHolder
+import com.example.vlados.crm.goodsandshops.GoodsShopsHolder
 import com.example.vlados.crm.honor.HonorBoard
 import com.example.vlados.crm.honor.HonorBoardFragment
 import kotlinx.android.synthetic.main.activity_navigation.*
@@ -83,7 +86,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
 
             }
             R.id.nav_goods_and_shops -> {
-
+                showGoodsAndShops()
             }
         }
 
@@ -102,6 +105,23 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
                 .replace(R.id.container, fragment, tag)
                 .commit()
         toolbar.title = getString(R.string.title_honor_board)
+    }
+
+    private fun showGoodsAndShops() {
+        val tag = GoodsShopsHolder::class.java.name
+        var fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null && fragment.isAdded) {
+            return
+        }
+        fragment = GoodsAndShopsHolder()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, tag)
+                .commit()
+        toolbar.title = getString(R.string.title_goods_and_shops)
+    }
+
+    override fun setFabClickListener(l: (view: View) -> Unit) {
+        fab.setOnClickListener(l)
     }
 
     override fun showSnack(text : String) {

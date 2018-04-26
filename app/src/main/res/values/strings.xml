@@ -34,4 +34,6 @@
     <string name="title_accounts">Accounts</string>
     <string name="title_reports">Reports</string>
     <string name="title_goods_and_shops">Goods and shops</string>
+    <string name="title_goods">Goods</string>
+    <string name="title_shops">Shops</string>
 </resources>
