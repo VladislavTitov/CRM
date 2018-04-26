@@ -18,12 +18,7 @@ import com.example.vlados.crm.accounts.mockJobs
 import com.example.vlados.crm.common.Navigator
 import kotlinx.android.synthetic.main.fragment_account_edit.view.*
 
-fun Context.AccountEdit(): DialogFragment {
-    val fragment = AccountEditFragment()
-    return fragment
-}
-
-fun Context.AccountEdit(account: Account): DialogFragment {
+fun Context.getAccountEditFragment(account: Account? = null): DialogFragment {
     val fragment = AccountEditFragment()
     val args = Bundle()
     args.putParcelable(AccountEditFragment.ACCOUNT_KEY, account)

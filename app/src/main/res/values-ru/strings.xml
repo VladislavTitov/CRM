@@ -18,5 +18,16 @@
     <string name="non_specified_password">Введите пароль</string>
 
 
+    <!--Titles-->
+    <string name="title_honor_board">Honor board</string>
+    <string name="title_chat">Чат</string>
+    <string name="title_sales">Скидки</string>
+    <string name="title_accounts">Учетные записи</string>
+    <string name="title_reports">Отчеты</string>
+    <string name="title_goods_and_shops">Товары и магазины</string>
+    <string name="title_goods">Товары</string>
+    <string name="title_shops">Магазины</string>
 
+    <string name="offered_sales_title">В процессе</string>
+    <string name="approved_sales_title">Одобренные</string>
 </resources>

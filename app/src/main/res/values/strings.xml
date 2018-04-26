@@ -39,6 +39,9 @@
     <string name="title_goods">Goods</string>
     <string name="title_shops">Shops</string>
 
+    <string name="offered_sales_title">Offered</string>
+    <string name="approved_sales_title">Approved</string>
+
     <!--Accounts labels-->
     <string name="company_label">Сеть магазинов</string>
     <string name="store_label">Магазин</string>
@@ -51,5 +54,14 @@
     <string name="edit_label">Изменить</string>
     <string name="cancel_label">Отмена</string>
     <string name="button_main_label">Главная</string>
+    <string name="sale_for_one_label">На 1 товар</string>
+    <string name="sale_for_all_label">На всю покупку</string>
+    <string name="sale_for_percent_label">Проценты</string>
+    <string name="sale_for_amount_label">Количетсвенно</string>
+    <string name="sale_amout_label">руб.</string>
+    <string name="sale_percent_label">%</string>
+    <string name="from_label">С</string>
+    <string name="to_label">до</string>
+    <string name="offer_label">Предложить</string>
 
 </resources>

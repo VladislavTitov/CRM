@@ -12,13 +12,15 @@ import android.view.View
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.vlados.crm.*
-import com.example.vlados.crm.accounts.ui.Account
 import com.example.vlados.crm.accounts.ui.AccountFragment
+import com.example.vlados.crm.accounts.ui.getAccountFragment
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.goodsandshops.GoodsAndShopsHolder
 import com.example.vlados.crm.goodsandshops.GoodsShopsHolder
 import com.example.vlados.crm.honor.HonorBoard
 import com.example.vlados.crm.honor.HonorBoardFragment
+import com.example.vlados.crm.sales.ui.SalesHolderFragment
+import com.example.vlados.crm.sales.ui.getSalesHolderFragment
 import kotlinx.android.synthetic.main.activity_navigation.*
 
 private const val ROLE_KEY = "role_key"
@@ -79,7 +81,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
 
             }
             R.id.nav_sales -> {
-
+                showSales()
             }
             R.id.nav_accounts -> {
                 showAccounts()
@@ -115,11 +117,24 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
         if (fragment != null && fragment.isAdded) {
             return
         }
-        fragment = Account()
+        fragment = getAccountFragment()
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment, tag)
                 .commit()
         toolbar.title = getString(R.string.title_accounts)
+    }
+
+    private fun showSales() {
+        val tag = SalesHolderFragment::class.java.name
+        var fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null && fragment.isAdded) {
+            return
+        }
+        fragment = getSalesHolderFragment()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, tag)
+                .commit()
+        toolbar.title = getString(R.string.title_sales)
     }
 
     private fun showGoodsAndShops() {

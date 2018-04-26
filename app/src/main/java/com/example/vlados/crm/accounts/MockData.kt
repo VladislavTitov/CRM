@@ -1,6 +1,7 @@
 package com.example.vlados.crm.accounts
 
 import com.example.vlados.crm.accounts.data.Account
+import com.example.vlados.crm.sales.data.Sale
 import java.util.*
 
 fun getAccountListMockData(): List<Account> {
@@ -9,6 +10,19 @@ fun getAccountListMockData(): List<Account> {
     for (i in 0..n) {
         val account = Account()
         result.add(account)
+    }
+    return result
+}
+
+fun getSaleListMockData(): List<Sale> {
+    val n = 20
+    val result = mutableListOf<Sale>()
+    for (i in 0..n) {
+        var sale: Sale
+        if (i % 3 == 0)
+            sale = Sale(approved = true)
+        else sale = Sale()
+        result.add(sale)
     }
     return result
 }
