@@ -34,4 +34,14 @@
     <string name="title_accounts">Accounts</string>
     <string name="title_reports">Reports</string>
     <string name="title_goods_and_shops">Goods and shops</string>
+    <string name="company_label">Сеть магазинов</string>
+    <string name="store_label">Магазин</string>
+    <string name="address_label">Адрес</string>
+    <string name="login_label">Логин</string>
+    <string name="password_label">Пароль</string>
+    <string name="name_label">Имя</string>
+    <string name="surname_label">Фамилия</string>
+    <string name="job_label">Статус</string>
+    <string name="edit_label">Изменить</string>
+    <string name="cancel_label">Отмена</string>
 </resources>
