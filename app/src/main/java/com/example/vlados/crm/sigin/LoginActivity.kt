@@ -86,14 +86,14 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(passwordText)) {
-            password.error = "Password is non-specified"
+            password.error = getString(R.string.non_specified_password)
             focusView = password
             cancel = true
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(loginText)) {
-            email.error = "Login is non-specified"
+            email.error = getString(R.string.non_specified_login)
             focusView = email
             cancel = true
         }
