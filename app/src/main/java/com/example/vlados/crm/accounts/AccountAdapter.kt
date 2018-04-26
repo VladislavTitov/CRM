@@ -37,7 +37,7 @@ class AccountAdapter(val itemClickListener: OnItemClickListener<Account>,
 
         fun bind(account: Account) {
             accountInstanceName.text = account.getFullName()
-            account_instance_job.text = account.job
+            accountInstanceJob.text = account.job
         }
 
         override fun onClick(v: View?) {
