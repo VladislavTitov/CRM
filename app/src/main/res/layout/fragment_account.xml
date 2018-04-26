@@ -10,13 +10,13 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/account_instance" />
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/accountFab"
         android:padding="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_fab" />
+        android:src="@drawable/ic_fab" />-->
 
 </android.support.design.widget.CoordinatorLayout>

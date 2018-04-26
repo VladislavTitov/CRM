@@ -63,7 +63,8 @@ class AccountFragment : MvpAppCompatFragment(), OnItemClickListener<Account> {
         accountAdapter = AccountAdapter(this, getAccountListMockData())
         accountRecycleView.adapter = accountAdapter
         accountRecycleView.layoutManager = LinearLayoutManager(context)
-        accountFab.setOnClickListener { onClick() }
+        navigator?.setFabClickListener { onClick() }
+        //accountFab.setOnClickListener { onClick() }
     }
 
 
