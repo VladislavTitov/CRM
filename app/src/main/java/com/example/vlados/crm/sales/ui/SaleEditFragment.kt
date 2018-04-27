@@ -59,11 +59,14 @@ class SaleEditFragment : MvpAppCompatDialogFragment() {
         when (id) {
             R.id.editSalePercentRadio -> {
                 view.editSalePercent.setEnabled(true)
+                view.editSalePercent.requestFocus()
                 view.editSaleForAmount.setEnabled(false)
             }
+
             R.id.editSaleForAmountRadio -> {
                 view.editSalePercent.setEnabled(false)
                 view.editSaleForAmount.setEnabled(true)
+                view.editSaleForAmount.requestFocus()
             }
         }
     }
