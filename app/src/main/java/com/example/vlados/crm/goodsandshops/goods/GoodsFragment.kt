@@ -18,6 +18,7 @@ import com.example.vlados.crm.R
 import com.example.vlados.crm.common.GenericDiffUtilsCallback
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.db.models.Good
+import com.example.vlados.crm.interfaces.ItemInterface
 import kotlinx.android.synthetic.main.fragment_goods.*
 
 fun Fragment.getGoodsFragment(): Fragment {
@@ -25,7 +26,7 @@ fun Fragment.getGoodsFragment(): Fragment {
     return fragment
 }
 
-class GoodsFragment : MvpAppCompatFragment(), GoodsInterface {
+class GoodsFragment : MvpAppCompatFragment(), ItemInterface<Good> {
 
     @InjectPresenter
     lateinit var presenter: GoodsPresenter
@@ -83,8 +84,8 @@ class GoodsFragment : MvpAppCompatFragment(), GoodsInterface {
         navigator = null
     }
 
-    override fun setGoods(goods: List<Good>) {
-        adapter?.setGoodsAndCalculateDiff(goods)
+    override fun setItems(items: List<Good>) {
+        adapter?.setGoodsAndCalculateDiff(items)
     }
 
     inner class GoodsListAdapter(private val onItemClickListener : (item : Good) -> Boolean) : RecyclerView.Adapter<GoodHolder>() {
@@ -124,7 +125,8 @@ class GoodsFragment : MvpAppCompatFragment(), GoodsInterface {
 
     }
 
-    inner class GoodHolder(itemView: View?, private val onItemClickListener : (item : Good) -> Boolean, private val onItemChange: (Int) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    inner class GoodHolder(itemView: View?, private val onItemClickListener : (item : Good) -> Boolean,
+                           private val onItemChange: (Int) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         private val nameTv : TextView? = itemView?.findViewById(R.id.good_name)
 

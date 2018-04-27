@@ -8,13 +8,15 @@ import java.util.*
 /**
  * Created by Daria Popova on 26.04.18.
  */
-data class Sale(var title: String = UUID.randomUUID().toString(),
+data class Sale(val id: Long = 4L,
+                var title: String = UUID.randomUUID().toString(),
                 var from: Date = Date(),
                 var to: Date = Date(),
                 var info: String = UUID.randomUUID().toString(),
                 var approved: Boolean = false) : Parcelable {
 
     constructor(source: Parcel) : this(
+            source.readLong(),
             source.readString(),
             source.readSerializable() as Date,
             source.readSerializable() as Date,
@@ -25,6 +27,7 @@ data class Sale(var title: String = UUID.randomUUID().toString(),
     override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeLong(id)
         writeString(title)
         writeSerializable(from)
         writeSerializable(to)

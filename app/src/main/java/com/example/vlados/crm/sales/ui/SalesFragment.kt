@@ -3,16 +3,19 @@ package com.example.vlados.crm.sales.ui
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
-import com.example.vlados.crm.accounts.OnItemClickListener
-import com.example.vlados.crm.accounts.getSaleListMockData
+import com.example.vlados.crm.common.GenericDiffUtilsCallback
 import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.interfaces.ItemInterface
 import com.example.vlados.crm.sales.data.Sale
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_sales.*
@@ -31,23 +34,28 @@ fun Context.getSalesFragment(approved: Boolean = false): Fragment {
     return fragment
 }
 
-class SalesFragment : MvpAppCompatFragment(), OnItemClickListener<Sale> {
+class SalesFragment : MvpAppCompatFragment(), ItemInterface<Sale> {
 
-    override fun onClick(t: Sale) {
+    lateinit var salesAdapter: SalesAdapter
+    var navigator: Navigator? = null
+    @InjectPresenter
+    lateinit var presenter: SalesPresenter
 
+    @ProvidePresenter
+    fun providePresenter(): SalesPresenter {
+        return SalesPresenter()
     }
+
 
     companion object {
         const val APPROVED_KEY = "approved"
     }
 
-    lateinit var salesAdapter: SalesAdapter
 
-    public fun onClick() {
+    public fun onFabClick() {
         context.getSaleEditFragment().show(fragmentManager, "");
     }
 
-    var navigator: Navigator? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -77,15 +85,15 @@ class SalesFragment : MvpAppCompatFragment(), OnItemClickListener<Sale> {
     }
 
     private fun setFabClickListener() {
-        navigator?.setFabClickListener { onClick() }
+        navigator?.setFabClickListener { onFabClick() }
     }
 
 
     fun init() {
-        salesAdapter = SalesAdapter(this, getSaleListMockData())
+        salesAdapter = SalesAdapter()
         rvSales.adapter = salesAdapter
         rvSales.layoutManager = LinearLayoutManager(context)
-
+        presenter.onItemsReady()
     }
 
 
@@ -94,13 +102,33 @@ class SalesFragment : MvpAppCompatFragment(), OnItemClickListener<Sale> {
         navigator = null
     }
 
+    override fun setItems(items: List<Sale>) {
+        salesAdapter.setItems(items)
+    }
 
+    inner class SalesAdapter() : RecyclerView.Adapter<SalesAdapter.SalesHolder>() {
 
-    inner class SalesAdapter(val itemClickListener: OnItemClickListener<Sale>,
-                             val sales: List<Sale>) : RecyclerView.Adapter<SalesAdapter.SalesHolder>() {
+        var sales = listOf<Sale>()
 
-
-
+        fun setItems(items: List<Sale>) {
+            val diffUtilsCallback = GenericDiffUtilsCallback<Sale>(sales, items,
+                    { oldPosition, newPosition ->
+                        sales[oldPosition].id == items[newPosition].id
+                    },
+                    { oldPosition, newPosition ->
+                        val oldItem = sales[oldPosition]
+                        val newItem = items[newPosition]
+                        oldItem.title == newItem.title &&
+                                oldItem.info == newItem.info &&
+                                oldItem.from == oldItem.from &&
+                                oldItem.to == oldItem.to &&
+                                oldItem.approved == oldItem.approved
+                    }
+            )
+            val result = DiffUtil.calculateDiff(diffUtilsCallback, false)
+            sales = items
+            result.dispatchUpdatesTo(this)
+        }
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): SalesHolder {
             val view = LayoutInflater.from(parent?.context)
@@ -109,29 +137,22 @@ class SalesFragment : MvpAppCompatFragment(), OnItemClickListener<Sale> {
             return SalesHolder(view)
         }
 
+
         override fun getItemCount(): Int {
             return sales.size
         }
 
         override fun onBindViewHolder(holder: SalesHolder?, position: Int) {
-            holder?.bind(sales[position])
+            holder?.bind(sales[position], position)
         }
 
         inner class SalesHolder(override val containerView: View) :
-                RecyclerView.ViewHolder(containerView), LayoutContainer, View.OnClickListener {
+                RecyclerView.ViewHolder(containerView), LayoutContainer {
 
 
-            fun bind(sale: Sale) {
+            fun bind(sale: Sale, position: Int) {
                 itemSaleTitle.text = sale.title
                 itemSaleInfo.text = sale.info
-            }
-
-            override fun onClick(v: View?) {
-                itemClickListener.onClick(sales[adapterPosition])
-            }
-
-            init {
-                containerView.setOnClickListener(this)
             }
 
         }

@@ -3,9 +3,10 @@ package com.example.vlados.crm.goodsandshops.goods
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.vlados.crm.db.models.Good
+import com.example.vlados.crm.interfaces.ItemInterface
 
 @InjectViewState
-class GoodsPresenter : MvpPresenter<GoodsInterface>() {
+class GoodsPresenter : MvpPresenter<ItemInterface<Good>>() {
 
     fun onGoodsRVReady() {
         val things = listOf(
@@ -32,7 +33,7 @@ class GoodsPresenter : MvpPresenter<GoodsInterface>() {
                 Good(21L, "Thing 21", 100, listOf("S", "L")),
                 Good(22L, "Thing 22", 100, listOf("S", "L"))
         )
-        viewState.setGoods(things)
+        viewState.setItems(things)
     }
 
     fun onItemClick(item : Good) : Boolean {

@@ -1,4 +1,4 @@
-package com.example.vlados.crm.accounts
+package com.example.vlados.crm
 
 import com.example.vlados.crm.accounts.data.Account
 import com.example.vlados.crm.sales.data.Sale

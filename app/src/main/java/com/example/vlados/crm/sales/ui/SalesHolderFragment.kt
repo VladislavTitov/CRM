@@ -39,7 +39,7 @@ class SalesHolderFragment : MvpAppCompatFragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        sales_pager.adapter = SalesAdapter(fragmentManager)
+        sales_pager.adapter = SalesAdapter(childFragmentManager)
         saleTabs.setupWithViewPager(sales_pager)
     }
 

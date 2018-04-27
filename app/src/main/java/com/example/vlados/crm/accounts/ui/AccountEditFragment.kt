@@ -13,9 +13,9 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.example.vlados.crm.R
 import com.example.vlados.crm.accounts.data.Account
-import com.example.vlados.crm.accounts.mockCompanies
-import com.example.vlados.crm.accounts.mockJobs
 import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.mockCompanies
+import com.example.vlados.crm.mockJobs
 import kotlinx.android.synthetic.main.fragment_account_edit.view.*
 
 fun Context.getAccountEditFragment(account: Account? = null): DialogFragment {
