@@ -7,4 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="default_inner_card_margin">12dp</dimen>
     <dimen name="edit_margin">3dp</dimen>
+    <dimen name="card_inner_side_padding">10dp</dimen>
+    <dimen name="login_cardview_radius">28dp</dimen>
+    <dimen name="default_card_margin">8dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.vlados.crm.goodsandshops
+package com.example.vlados.crm.sales.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -11,17 +11,19 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.Navigator
-import com.example.vlados.crm.goodsandshops.goods.getGoodsFragment
-import com.example.vlados.crm.goodsandshops.shops.getShopsFragment
-import kotlinx.android.synthetic.main.fragment_goods_and_shops_holder.*
+import kotlinx.android.synthetic.main.fragment_sales_holder.*
 import java.util.*
 
-fun Context.GoodsAndShopsHolder(): Fragment {
-    val holder = GoodsShopsHolder()
-    return holder
+/**
+ * Created by Daria Popova on 26.04.18.
+ */
+fun Context.getSalesHolderFragment(): Fragment {
+    val fragment = SalesHolderFragment()
+    return fragment
 }
 
-class GoodsShopsHolder : MvpAppCompatFragment() {
+
+class SalesHolderFragment : MvpAppCompatFragment() {
 
     var navigator: Navigator? = null
 
@@ -33,12 +35,12 @@ class GoodsShopsHolder : MvpAppCompatFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_goods_and_shops_holder, container, false)
+        return inflater?.inflate(R.layout.fragment_sales_holder, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        pager.adapter = GoodsShopsAdapter(childFragmentManager)
-        tabs.setupWithViewPager(pager)
+        sales_pager.adapter = SalesAdapter(childFragmentManager)
+        saleTabs.setupWithViewPager(sales_pager)
     }
 
     override fun onDetach() {
@@ -46,7 +48,7 @@ class GoodsShopsHolder : MvpAppCompatFragment() {
         navigator = null
     }
 
-    inner class GoodsShopsAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+    inner class SalesAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
 
         private val fragments = WeakHashMap<Int, Fragment>()
 
@@ -55,11 +57,7 @@ class GoodsShopsHolder : MvpAppCompatFragment() {
             if (calledFragment != null) {
                 return calledFragment
             }
-            calledFragment = when (position) {
-                0 -> getGoodsFragment()
-                1 -> getShopsFragment()
-                else -> getGoodsFragment()
-            }
+            calledFragment = context.getSalesFragment()
             fragments.put(position, calledFragment)
             return calledFragment
         }
@@ -70,9 +68,9 @@ class GoodsShopsHolder : MvpAppCompatFragment() {
 
         override fun getPageTitle(position: Int): CharSequence {
             return when (position) {
-                0 -> getString(R.string.title_goods)
-                1 -> getString(R.string.title_shops)
-                else -> getString(R.string.title_goods)
+                0 -> getString(R.string.offered_sales_title)
+                1 -> getString(R.string.approved_sales_title)
+                else -> getString(R.string.offered_sales_title)
             }
         }
 

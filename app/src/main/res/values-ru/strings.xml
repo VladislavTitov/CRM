@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Strings related to login -->
+    <string name="title_activity_login">Вход</string>
+
+    <string name="prompt_email">Логин</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Войти</string>
+
+    <string name="error_invalid_email">Неверный логин</string>
+    <string name="error_invalid_password">Слишком короткий пароль</string>
+    <string name="error_incorrect_password">Неверный пароль</string>
+    <string name="error_field_required">Эти поля обязательны для заполения</string>
+
+    <string name="non_specified_login">Введите логин</string>
+    <string name="non_specified_password">Введите пароль</string>
+
+
+    <!--Titles-->
+    <string name="title_honor_board">Honor board</string>
+    <string name="title_chat">Чат</string>
+    <string name="title_sales">Скидки</string>
+    <string name="title_accounts">Учетные записи</string>
+    <string name="title_reports">Отчеты</string>
+    <string name="title_goods_and_shops">Товары и магазины</string>
+    <string name="title_goods">Товары</string>
+    <string name="title_shops">Магазины</string>
+
+    <string name="offered_sales_title">В процессе</string>
+    <string name="approved_sales_title">Одобренные</string>
+</resources>

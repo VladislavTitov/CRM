@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/default_card_margin"
-    android:layout_marginStart="@dimen/default_card_margin"
     android:layout_marginEnd="@dimen/default_card_margin"
+    android:layout_marginStart="@dimen/default_card_margin"
+    android:layout_marginTop="@dimen/default_card_margin"
     app:cardCornerRadius="@dimen/cardview_default_radius"
     app:cardElevation="@dimen/default_inner_card_margin">
 
@@ -17,14 +17,22 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/good_name"
-            android:layout_width="match_parent"
+            android:id="@+id/itemSaleTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/grey_text_color"
+            tools:text="50% на все!" />
 
+        <TextView
+            android:id="@+id/itemSaleInfo"
+            android:layout_width="wrap_content"
+            android:lines="1"
+            android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
-            tools:text="Test Item" />
+            android:textColor="@color/light_gray_color"
+            tools:text="С 1 апреля по 10 мая" />
 
     </LinearLayout>
 
