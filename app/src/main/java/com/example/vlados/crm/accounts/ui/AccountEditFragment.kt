@@ -66,10 +66,10 @@ class AccountEditFragment : MvpAppCompatDialogFragment() {
         view.accountEditCompany.adapter = companyAdapter
         view.accountEditCompany.setSelection(mockCompanies.indexOf(account?.company))
 
-        val jobAdapter = ArrayAdapter<String>(context,
+        val statusAdapter = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_dropdown_item, mockJobs)
-        view.accountEditJob.adapter = jobAdapter
-        view.accountEditJob.setSelection(mockJobs.indexOf(account?.job))
+        view.accountEditJob.adapter = statusAdapter
+        view.accountEditJob.setSelection(mockJobs.indexOf(account?.status))
     }
 
 

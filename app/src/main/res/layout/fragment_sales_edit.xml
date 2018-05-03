@@ -1,196 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
             <LinearLayout
-                android:id="@+id/fromToSaleHolder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/fromLabel"
+                    android:id="@+id/fromToSaleHolder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/from_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_text_color" />
-
-                <EditText
-                    android:id="@+id/editSaleFromDate"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ems="10"
-                    android:inputType="date"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/light_gray_color"
-                    tools:text="15.04.2018" />
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/toLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/to_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_text_color" />
+                        android:id="@+id/fromLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/from_label"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/grey_text_color"/>
 
                 <EditText
-                    android:id="@+id/editSaleToDate"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:ems="10"
-                    android:inputType="date"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/light_gray_color"
-                    tools:text="20.05.2018" />
+                        android:id="@+id/editSaleFromDate"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:inputType="date"
+                        android:focusableInTouchMode="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/light_gray_color"
+                        tools:text="15.04.2018"/>
+
+                <TextView
+                        android:id="@+id/toLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/to_label"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/grey_text_color"/>
+
+                <EditText
+                        android:id="@+id/editSaleToDate"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:inputType="date"
+                        android:focusableInTouchMode="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/light_gray_color"
+                        tools:text="20.05.2018"/>
 
             </LinearLayout>
 
 
             <RadioGroup
-                android:id="@+id/editSaleType1RG"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fromToSaleHolder">
+                    android:id="@+id/editSaleType1RG"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fromToSaleHolder">
 
                 <RadioButton
-                    android:id="@+id/editSaleForOne"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="8dp"
-                    android:checked="true"
-                    android:text="@string/sale_for_one_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_text_color" />
+                        android:id="@+id/editSaleForOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="8dp"
+                        android:checked="true"
+                        android:text="@string/sale_for_one_label"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/grey_text_color"/>
 
                 <RadioButton
-                    android:id="@+id/editSaleForAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/sale_for_all_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_text_color" />
+                        android:id="@+id/editSaleForAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/sale_for_all_label"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/grey_text_color"/>
             </RadioGroup>
 
             <RadioGroup
-                android:id="@+id/editSaleType2RG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editSaleType1RG">
-
-                <RadioButton
-                    android:id="@+id/editSalePercentRadio"
+                    android:id="@+id/editSaleType2RG"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:checked="true"
-                    android:text="@string/sale_for_percent_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_text_color"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <RadioButton
-                    android:id="@+id/editSaleForAmountRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/sale_for_amount_label"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/grey_text_color"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/editSalePercentRadio" />
+                    app:layout_constraintTop_toBottomOf="@id/editSaleType1RG">
+
+                <RadioButton
+                        android:id="@+id/editSalePercentRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:checked="true"
+                        android:text="@string/sale_for_percent_label"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/grey_text_color"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <RadioButton
+                        android:id="@+id/editSaleForAmountRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/sale_for_amount_label"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/grey_text_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/editSalePercentRadio"/>
 
             </RadioGroup>
 
 
             <EditText
-                android:id="@+id/editSalePercent"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:inputType="number"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/light_gray_color"
-                app:layout_constraintStart_toEndOf="@id/editSaleType2RG"
-                app:layout_constraintTop_toTopOf="@id/editSaleType2RG"
-                tools:text="45" />
+                    android:id="@+id/editSalePercent"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:inputType="number"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/light_gray_color"
+                    app:layout_constraintStart_toEndOf="@id/editSaleType2RG"
+                    app:layout_constraintTop_toTopOf="@id/editSaleType2RG"
+                    tools:text="45"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/sale_percent_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_text_color"
-                app:layout_constraintBottom_toBottomOf="@+id/editSalePercent"
-                app:layout_constraintStart_toEndOf="@+id/editSalePercent"
-                app:layout_constraintTop_toTopOf="@+id/editSalePercent" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/sale_percent_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/grey_text_color"
+                    app:layout_constraintBottom_toBottomOf="@+id/editSalePercent"
+                    app:layout_constraintStart_toEndOf="@+id/editSalePercent"
+                    app:layout_constraintTop_toTopOf="@+id/editSalePercent"/>
 
             <EditText
-                android:id="@+id/editSaleForAmount"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:inputType="number"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/light_gray_color"
-                app:layout_constraintBottom_toBottomOf="@+id/editSaleType2RG"
-                app:layout_constraintStart_toEndOf="@+id/editSaleType2RG"
-                tools:text="500" />
+                    android:id="@+id/editSaleForAmount"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:inputType="number"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/light_gray_color"
+                    app:layout_constraintBottom_toBottomOf="@+id/editSaleType2RG"
+                    app:layout_constraintStart_toEndOf="@+id/editSaleType2RG"
+                    tools:text="500"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/sale_amout_label"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/grey_text_color"
-                app:layout_constraintBottom_toBottomOf="@+id/editSaleForAmount"
-                app:layout_constraintStart_toEndOf="@+id/editSaleForAmount"
-                app:layout_constraintTop_toTopOf="@+id/editSaleForAmount" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/sale_amout_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/grey_text_color"
+                    app:layout_constraintBottom_toBottomOf="@+id/editSaleForAmount"
+                    app:layout_constraintStart_toEndOf="@+id/editSaleForAmount"
+                    app:layout_constraintTop_toTopOf="@+id/editSaleForAmount"/>
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>

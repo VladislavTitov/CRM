@@ -1,6 +1,7 @@
 package com.example.vlados.crm.sales.ui
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
@@ -8,12 +9,16 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.sales.data.Sale
 import kotlinx.android.synthetic.main.fragment_sales_edit.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -71,12 +76,38 @@ class SaleEditFragment : MvpAppCompatDialogFragment() {
         }
     }
 
+    //    todo change this for something more elegant
+    private fun showDateDialog(editText: EditText) {
+        val salesCalendar = Calendar.getInstance()
+        val date = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+                salesCalendar.set(Calendar.YEAR, year)
+                salesCalendar.set(Calendar.MONTH, month)
+                salesCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateEditTextDate(editText, salesCalendar)
+            }
+        }
+        DatePickerDialog(context, date, salesCalendar.get(Calendar.YEAR), salesCalendar.get(Calendar.MONTH),
+                salesCalendar.get(Calendar.DAY_OF_MONTH)).show()
+    }
+
+    private fun updateEditTextDate(editText: EditText, salesCalendar: Calendar) {
+        val format = "dd/MM/yyyy"
+        val dateFormat = SimpleDateFormat(format)
+        editText.setText(dateFormat.format(salesCalendar.time))
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.fragment_sales_edit, null)
 
         view.editSaleType2RG.setOnCheckedChangeListener { group, checkedId -> onChecked(checkedId, view) }
+
+
+        view.editSaleToDate.setOnClickListener { showDateDialog(view.editSaleToDate) }
+        view.editSaleFromDate.setOnClickListener { showDateDialog(view.editSaleFromDate) }
+
 
         val builder = AlertDialog.Builder(activity)
         with(builder) {

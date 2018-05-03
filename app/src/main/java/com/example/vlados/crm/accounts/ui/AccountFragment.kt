@@ -29,6 +29,11 @@ fun Context.getAccountFragment(): Fragment {
 class AccountFragment : MvpAppCompatFragment(), ItemInterface<Account> {
 
     lateinit var accountAdapter: AccountAdapter
+
+    public fun onClick() {
+        context.getAccountEditFragment().show(fragmentManager, "");
+    }
+
     var navigator: Navigator? = null
     @InjectPresenter
     lateinit var presenter: AccountsPresenter
@@ -123,7 +128,7 @@ class AccountFragment : MvpAppCompatFragment(), ItemInterface<Account> {
                         val newItem = new[newPosition]
                         oldItem.name == newItem.name &&
                                 oldItem.address == newItem.address &&
-                                oldItem.job == newItem.job &&
+                                oldItem.status == newItem.status&&
                                 oldItem.login == newItem.login &&
                                 oldItem.password == newItem.password &&
                                 oldItem.company == newItem.company &&
@@ -144,7 +149,7 @@ class AccountFragment : MvpAppCompatFragment(), ItemInterface<Account> {
 
             fun bind(account: Account, position: Int) {
                 accountInstanceName.text = account.getFullName()
-                accountInstanceJob.text = account.job
+                accountInstanceStatus.text = account.status
 
                 containerView.setOnClickListener {
 //                    if (onItemClickLister(account))

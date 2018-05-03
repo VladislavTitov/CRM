@@ -18,7 +18,7 @@ data class Account(val id: Long = Random().nextLong(),
                    var password: String = UUID.randomUUID().toString(),
                    var name: String = UUID.randomUUID().toString(),
                    var surname: String = UUID.randomUUID().toString(),
-                   var job: String = getRandomJob()) : Parcelable {
+                   var status: String = getRandomJob()) : Parcelable {
 
     public fun getFullName(): String {
         return name + " " + surname;
@@ -39,7 +39,6 @@ data class Account(val id: Long = Random().nextLong(),
     override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeLong(id)
         writeString(company)
         writeString(store)
         writeString(address)
@@ -47,7 +46,7 @@ data class Account(val id: Long = Random().nextLong(),
         writeString(password)
         writeString(name)
         writeString(surname)
-        writeString(job)
+        writeString(status)
     }
 
     companion object {
