@@ -1,7 +1,8 @@
 package com.example.vlados.crm
 
-import com.example.vlados.crm.accounts.data.Account
-import com.example.vlados.crm.sales.data.Sale
+import com.example.vlados.crm.db.models.Account
+import com.example.vlados.crm.db.models.Sale
+import com.example.vlados.crm.db.models.Shop
 import java.util.*
 
 fun getAccountListMockData(): List<Account> {
@@ -37,4 +38,12 @@ val mockJobs = arrayOf("Кассир", "Руководитель", "Уборщи
 
 fun getRandomJob(): String {
     return mockJobs[Random().nextInt(mockJobs.size)]
+}
+
+fun getShopListMockData():List<Shop>{
+    val result= mutableListOf<Shop>()
+    for (i in 0..13){
+        result.add(Shop())
+    }
+    return result
 }

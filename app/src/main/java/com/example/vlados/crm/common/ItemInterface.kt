@@ -1,4 +1,4 @@
-package com.example.vlados.crm.interfaces
+package com.example.vlados.crm.common
 
 import com.arellomobile.mvp.MvpView
 

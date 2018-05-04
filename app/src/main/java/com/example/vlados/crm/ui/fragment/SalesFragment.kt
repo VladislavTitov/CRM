@@ -1,4 +1,4 @@
-package com.example.vlados.crm.sales.ui
+package com.example.vlados.crm.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,21 +9,19 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.GenericDiffUtilsCallback
+import com.example.vlados.crm.common.ItemInterface
+import com.example.vlados.crm.common.NavMvpAppCompatFragment
 import com.example.vlados.crm.common.Navigator
-import com.example.vlados.crm.interfaces.ItemInterface
-import com.example.vlados.crm.sales.data.Sale
+import com.example.vlados.crm.db.models.Sale
+import com.example.vlados.crm.presenters.SalesPresenter
+import com.example.vlados.crm.ui.edit.getSaleEditFragment
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_sales.*
 import kotlinx.android.synthetic.main.item_sale.*
-
-/**
- * Created by Daria Popova on 26.04.18.
- */
 
 
 fun Context.getSalesFragment(approved: Boolean = false): Fragment {
@@ -34,7 +32,7 @@ fun Context.getSalesFragment(approved: Boolean = false): Fragment {
     return fragment
 }
 
-class SalesFragment : MvpAppCompatFragment(), ItemInterface<Sale> {
+class SalesFragment : NavMvpAppCompatFragment(), ItemInterface<Sale> {
 
     lateinit var salesAdapter: SalesAdapter
     var navigator: Navigator? = null
@@ -79,14 +77,11 @@ class SalesFragment : MvpAppCompatFragment(), ItemInterface<Sale> {
         init()
     }
 
-    override fun onResume() {
-        super.onResume()
-        setFabClickListener()
-    }
 
-    private fun setFabClickListener() {
-        navigator?.setFabClickListener { onFabClick() }
-    }
+
+    override fun changeFab() {
+        navigator?.setFabClickListener { onFabClick() }  }
+
 
 
     fun init() {

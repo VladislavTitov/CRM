@@ -1,4 +1,4 @@
-package com.example.vlados.crm.sales.ui
+package com.example.vlados.crm.ui.holders
 
 import android.content.Context
 import android.os.Bundle
@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.ui.fragment.getSalesFragment
 import kotlinx.android.synthetic.main.fragment_sales_holder.*
 import java.util.*
 

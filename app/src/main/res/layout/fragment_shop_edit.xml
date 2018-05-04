@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:textColor="@color/grey_text_color"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:text="@string/title_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <EditText
+                style="@style/TextAppearance.AppCompat.Medium"
+                tools:text="H&amp;M"
+                android:textColor="@color/grey_text_color"
+                android:textStyle="bold"
+                android:id="@+id/editShopName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:textColor="@color/grey_text_color"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:text="@string/address_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <EditText
+                style="@style/TextAppearance.AppCompat.Medium"
+                tools:text="ТЦ Мега, проспект Победы 141"
+                android:textColor="@color/grey_text_color"
+                android:textStyle="bold"
+                android:id="@+id/editShopAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:textColor="@color/grey_text_color"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:text="@string/admin_fio_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <EditText
+                style="@style/TextAppearance.AppCompat.Medium"
+                tools:text="Николай Федоров"
+                android:textColor="@color/grey_text_color"
+                android:textStyle="bold"
+                android:id="@+id/editShopAdminName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</ScrollView>

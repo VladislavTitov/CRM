@@ -1,10 +1,10 @@
-package com.example.vlados.crm.accounts.ui
+package com.example.vlados.crm.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.example.vlados.crm.accounts.data.Account
+import com.example.vlados.crm.db.models.Account
 import com.example.vlados.crm.getAccountListMockData
-import com.example.vlados.crm.interfaces.ItemInterface
+import com.example.vlados.crm.common.ItemInterface
 
 @InjectViewState
 class AccountsPresenter : MvpPresenter<ItemInterface<Account>>() {

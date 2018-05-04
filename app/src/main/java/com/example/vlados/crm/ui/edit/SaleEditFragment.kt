@@ -1,4 +1,4 @@
-package com.example.vlados.crm.sales.ui
+package com.example.vlados.crm.ui.edit
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -12,10 +12,10 @@ import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.example.vlados.crm.R
+import com.example.vlados.crm.common.EditMvpAppCompatDialogFragment
 import com.example.vlados.crm.common.Navigator
-import com.example.vlados.crm.sales.data.Sale
+import com.example.vlados.crm.db.models.Sale
 import kotlinx.android.synthetic.main.fragment_sales_edit.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,7 +34,23 @@ fun Context.getSaleEditFragment(sale: Sale? = null): DialogFragment {
     return fragment
 }
 
-class SaleEditFragment : MvpAppCompatDialogFragment() {
+class SaleEditFragment : EditMvpAppCompatDialogFragment() {
+
+    override fun checkCorrectness(view: View): Boolean {
+        var result = true
+        val message = getString(R.string.empty_error_text)
+        if (isEmpty(view.editSaleToDate)) {
+            setEmptyError(view.editSaleToDate, message)
+            result = false
+        }
+        if (isEmpty(view.editSaleFromDate)) {
+            setEmptyError(view.editSaleFromDate, message)
+            result = false
+        }
+
+        return result
+    }
+
 
     companion object {
         const val SALE_KEY = "sale_key"
@@ -114,7 +130,7 @@ class SaleEditFragment : MvpAppCompatDialogFragment() {
             setView(view)
             setPositiveButton(R.string.offer_label, object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
-                    saveSale()
+
                 }
             })
             setNegativeButton(R.string.cancel_label, object : DialogInterface.OnClickListener {
@@ -125,11 +141,16 @@ class SaleEditFragment : MvpAppCompatDialogFragment() {
         }
 
         bindAccount(view)
-        return builder.create()
+        val dialog = builder.create()
+        dialog.setOnShowListener { changePosButton(view) }
+        return dialog
     }
 
-    private fun saveSale() {
-        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+    override fun save(view: View) {
+        if (checkCorrectness(view)) {
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+            dismiss()
+        }
     }
 
 

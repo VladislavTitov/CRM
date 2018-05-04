@@ -1,9 +1,9 @@
-package com.example.vlados.crm.goodsandshops.goods
+package com.example.vlados.crm.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.vlados.crm.db.models.Good
-import com.example.vlados.crm.interfaces.ItemInterface
+import com.example.vlados.crm.common.ItemInterface
 
 @InjectViewState
 class GoodsPresenter : MvpPresenter<ItemInterface<Good>>() {

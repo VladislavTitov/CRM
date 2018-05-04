@@ -1,4 +1,4 @@
-package com.example.vlados.crm.main
+package com.example.vlados.crm.ui
 
 import android.content.Context
 import android.content.Intent
@@ -12,15 +12,15 @@ import android.view.View
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.vlados.crm.*
-import com.example.vlados.crm.accounts.ui.AccountFragment
-import com.example.vlados.crm.accounts.ui.getAccountFragment
+import com.example.vlados.crm.ui.fragment.AccountFragment
+import com.example.vlados.crm.ui.fragment.getAccountFragment
 import com.example.vlados.crm.common.Navigator
-import com.example.vlados.crm.goodsandshops.GoodsAndShopsHolder
-import com.example.vlados.crm.goodsandshops.GoodsShopsHolder
-import com.example.vlados.crm.honor.HonorBoard
-import com.example.vlados.crm.honor.HonorBoardFragment
-import com.example.vlados.crm.sales.ui.SalesHolderFragment
-import com.example.vlados.crm.sales.ui.getSalesHolderFragment
+import com.example.vlados.crm.ui.holders.GoodsAndShopsHolder
+import com.example.vlados.crm.ui.holders.GoodsShopsHolder
+import com.example.vlados.crm.ui.fragment.HonorBoard
+import com.example.vlados.crm.ui.fragment.HonorBoardFragment
+import com.example.vlados.crm.ui.holders.SalesHolderFragment
+import com.example.vlados.crm.ui.holders.getSalesHolderFragment
 import kotlinx.android.synthetic.main.activity_navigation.*
 
 private const val ROLE_KEY = "role_key"

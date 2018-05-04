@@ -1,4 +1,4 @@
-package com.example.vlados.crm.honor
+package com.example.vlados.crm.ui.fragment
 
 import android.content.Context
 import android.os.Bundle

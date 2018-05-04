@@ -52,6 +52,7 @@
     <string name="surname_label">Фамилия</string>
     <string name="job_label">Статус</string>
     <string name="edit_label">Изменить</string>
+    <string name="save_label">Сохранить</string>
     <string name="cancel_label">Отмена</string>
     <string name="button_main_label">Главная</string>
     <string name="sale_for_one_label">На 1 товар</string>
@@ -63,5 +64,8 @@
     <string name="from_label">С</string>
     <string name="to_label">до</string>
     <string name="offer_label">Предложить</string>
+    <string name="admin_fio_label">Имя администратора</string>
+    <string name="title_label">Название</string>
+    <string name="empty_error_text">Заполните это поле</string>
 
 </resources>

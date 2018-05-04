@@ -1,4 +1,4 @@
-package com.example.vlados.crm.accounts.ui
+package com.example.vlados.crm.ui.edit
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -10,10 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.example.vlados.crm.R
-import com.example.vlados.crm.accounts.data.Account
+import com.example.vlados.crm.common.EditMvpAppCompatDialogFragment
 import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.db.models.Account
 import com.example.vlados.crm.mockCompanies
 import com.example.vlados.crm.mockJobs
 import kotlinx.android.synthetic.main.fragment_account_edit.view.*
@@ -26,7 +26,38 @@ fun Context.getAccountEditFragment(account: Account? = null): DialogFragment {
     return fragment
 }
 
-class AccountEditFragment : MvpAppCompatDialogFragment() {
+class AccountEditFragment : EditMvpAppCompatDialogFragment() {
+
+    override fun checkCorrectness(view: View): Boolean {
+        var result = true
+        val message = getString(R.string.empty_error_text)
+        if (isEmpty(view.accountEditName)) {
+            setEmptyError(view.accountEditName, message)
+            result = false
+        }
+        if (isEmpty(view.accountEditLogin)) {
+            setEmptyError(view.accountEditLogin, message)
+            result = false
+        }
+        if (isEmpty(view.accountEditSurname)) {
+            setEmptyError(view.accountEditSurname, message)
+            result = false
+        }
+        if (isEmpty(view.accountEditPassword)) {
+            setEmptyError(view.accountEditPassword, message)
+            result = false
+        }
+        if (isEmpty(view.accountEditAddress)) {
+            setEmptyError(view.accountEditAddress, message)
+            result = false
+        }
+        if (isEmpty(view.accountEditStore)) {
+            setEmptyError(view.accountEditStore, message)
+            result = false
+        }
+
+        return result
+    }
 
 
     var navigator: Navigator? = null
@@ -83,7 +114,7 @@ class AccountEditFragment : MvpAppCompatDialogFragment() {
             setView(view)
             setPositiveButton(R.string.edit_label, object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
-                    saveAccount()
+
                 }
             })
             setNegativeButton(R.string.cancel_label, object : DialogInterface.OnClickListener {
@@ -94,11 +125,16 @@ class AccountEditFragment : MvpAppCompatDialogFragment() {
         }
 
         bindAccount(view)
-        return builder.create()
+        val dialog = builder.create()
+        dialog.setOnShowListener { changePosButton(view) }
+        return dialog
     }
 
-    private fun saveAccount() {
-        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+    override fun save(view: View) {
+        if (checkCorrectness(view)) {
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+            dismiss()
+        }
     }
 
 

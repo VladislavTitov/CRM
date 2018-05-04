@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.vlados.crm.R
-import com.example.vlados.crm.main.NavigationActivity
+import com.example.vlados.crm.ui.NavigationActivity
 import com.example.vlados.crm.utils.afterTextChanged
 import kotlinx.android.synthetic.main.activity_login.*
 

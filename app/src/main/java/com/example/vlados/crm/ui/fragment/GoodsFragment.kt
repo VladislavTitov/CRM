@@ -1,4 +1,4 @@
-package com.example.vlados.crm.goodsandshops.goods
+package com.example.vlados.crm.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -11,14 +11,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.GenericDiffUtilsCallback
+import com.example.vlados.crm.common.ItemInterface
+import com.example.vlados.crm.common.NavMvpAppCompatFragment
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.db.models.Good
-import com.example.vlados.crm.interfaces.ItemInterface
+import com.example.vlados.crm.presenters.GoodsPresenter
 import kotlinx.android.synthetic.main.fragment_goods.*
 
 fun Fragment.getGoodsFragment(): Fragment {
@@ -26,7 +27,7 @@ fun Fragment.getGoodsFragment(): Fragment {
     return fragment
 }
 
-class GoodsFragment : MvpAppCompatFragment(), ItemInterface<Good> {
+class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
 
     @InjectPresenter
     lateinit var presenter: GoodsPresenter
@@ -61,19 +62,16 @@ class GoodsFragment : MvpAppCompatFragment(), ItemInterface<Good> {
         presenter.onGoodsRVReady()
     }
 
-    override fun onResume() {
-        super.onResume()
-        setFabClickListener()
-    }
+
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {
-            setFabClickListener()
+           changeFab()
         }
     }
 
-    private fun setFabClickListener() {
+    override fun changeFab() {
         navigator?.setFabClickListener {
             Snackbar.make(it, "Hi from Goods!", Snackbar.LENGTH_LONG).show()
         }

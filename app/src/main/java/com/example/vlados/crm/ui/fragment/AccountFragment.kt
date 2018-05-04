@@ -1,4 +1,4 @@
-package com.example.vlados.crm.accounts.ui
+package com.example.vlados.crm.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,24 +9,25 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
-import com.example.vlados.crm.accounts.data.Account
 import com.example.vlados.crm.common.GenericDiffUtilsCallback
+import com.example.vlados.crm.common.ItemInterface
+import com.example.vlados.crm.common.NavMvpAppCompatFragment
 import com.example.vlados.crm.common.Navigator
-import com.example.vlados.crm.interfaces.ItemInterface
+import com.example.vlados.crm.db.models.Account
+import com.example.vlados.crm.presenters.AccountsPresenter
+import com.example.vlados.crm.ui.edit.getAccountEditFragment
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.item_account.*
 
-fun Context.getAccountFragment(): Fragment {
-    val fragment = AccountFragment()
-    return fragment
-}
+class AccountFragment : NavMvpAppCompatFragment(), ItemInterface<Account> {
 
-class AccountFragment : MvpAppCompatFragment(), ItemInterface<Account> {
+    override fun changeFab() {
+        navigator?.setFabClickListener { onFabClick() }
+    }
 
     lateinit var accountAdapter: AccountAdapter
 
@@ -77,15 +78,6 @@ class AccountFragment : MvpAppCompatFragment(), ItemInterface<Account> {
         presenter.onReady()
     }
 
-    override fun onResume() {
-        super.onResume()
-        setFabListener()
-    }
-
-    private fun setFabListener() {
-        navigator?.setFabClickListener { onFabClick() }
-    }
-
 
     override fun onDetach() {
         super.onDetach()
@@ -128,7 +120,7 @@ class AccountFragment : MvpAppCompatFragment(), ItemInterface<Account> {
                         val newItem = new[newPosition]
                         oldItem.name == newItem.name &&
                                 oldItem.address == newItem.address &&
-                                oldItem.status == newItem.status&&
+                                oldItem.status == newItem.status &&
                                 oldItem.login == newItem.login &&
                                 oldItem.password == newItem.password &&
                                 oldItem.company == newItem.company &&
@@ -152,17 +144,22 @@ class AccountFragment : MvpAppCompatFragment(), ItemInterface<Account> {
                 accountInstanceStatus.text = account.status
 
                 containerView.setOnClickListener {
-//                    if (onItemClickLister(account))
+                    //                    if (onItemClickLister(account))
 //                        onItemChange(position)
                     onClick(account)
                 }
             }
 
-            private fun onClick(account: Account){
+            private fun onClick(account: Account) {
                 context.getAccountEditFragment(account).show(fragmentManager, "")
             }
 
         }
 
     }
+}
+
+fun Context.getAccountFragment(): Fragment {
+    val fragment = AccountFragment()
+    return fragment
 }

@@ -1,4 +1,4 @@
-package com.example.vlados.crm.sales.data
+package com.example.vlados.crm.db.models
 
 
 import android.os.Parcel

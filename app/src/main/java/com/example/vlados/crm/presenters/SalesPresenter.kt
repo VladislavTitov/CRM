@@ -1,10 +1,10 @@
-package com.example.vlados.crm.sales.ui
+package com.example.vlados.crm.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.example.vlados.crm.common.ItemInterface
+import com.example.vlados.crm.db.models.Sale
 import com.example.vlados.crm.getSaleListMockData
-import com.example.vlados.crm.interfaces.ItemInterface
-import com.example.vlados.crm.sales.data.Sale
 
 
 @InjectViewState
