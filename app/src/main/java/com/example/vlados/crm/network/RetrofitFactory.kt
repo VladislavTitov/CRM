@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Created by vlados on 26.03.18.
  */
 
-const val BASE_URL = "https://agile-journey-78814.herokuapp.com/v1/"
+const val BASE_URL = "http://167.99.223.79:3000/v1/"
 
 private fun create(): Retrofit {
     return Retrofit.Builder()
