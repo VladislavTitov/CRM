@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
@@ -27,7 +28,7 @@ fun Context.getShopsFragment(): Fragment {
     return fragment
 }
 
-class ShopsFragment : NavMvpAppCompatFragment(), ItemInterface<Shop> {
+class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.InnerNavigator {
 
     override fun changeFab() {
         navigator?.setFabClickListener { onFabClick() }
@@ -80,6 +81,14 @@ class ShopsFragment : NavMvpAppCompatFragment(), ItemInterface<Shop> {
         shopsRV.adapter = shopAdapter
         shopsRV.layoutManager = LinearLayoutManager(context)
         presenter.onItemsReady()
+    }
+
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            changeFab()
+        }
     }
 
 

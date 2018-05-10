@@ -41,18 +41,18 @@ class GoodsShopsHolder : MvpAppCompatFragment() {
         val adapter = GoodsShopsAdapter(childFragmentManager)
         pager.adapter = adapter
 
-        pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-            }
-
-            override fun onPageSelected(position: Int) {
-                adapter.changeFab(position)
-            }
-        })
+//        pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrollStateChanged(state: Int) {
+//            }
+//
+//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+//
+//            }
+//
+//            override fun onPageSelected(position: Int) {
+//                adapter.changeFab(position)
+//            }
+//        })
         tabs.setupWithViewPager(pager)
     }
 

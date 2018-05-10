@@ -20,6 +20,7 @@ import com.example.vlados.crm.common.NavMvpAppCompatFragment
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.db.models.Good
 import com.example.vlados.crm.presenters.GoodsPresenter
+import com.example.vlados.crm.ui.edit.getGoodEditDialog
 import kotlinx.android.synthetic.main.fragment_goods.*
 
 fun Fragment.getGoodsFragment(): Fragment {
@@ -34,7 +35,7 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
 
     @ProvidePresenter
     fun providePresenter() : GoodsPresenter {
-        return GoodsPresenter()
+        return GoodsPresenter(navigator)
     }
 
     var navigator: Navigator? = null
@@ -56,7 +57,10 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        adapter = GoodsListAdapter { presenter.onItemClick(it) }
+        adapter = GoodsListAdapter {
+            showEditDialog(it)
+            presenter.onItemClick(it)
+        }
         rv_goods.adapter = adapter
         rv_goods.layoutManager = LinearLayoutManager(context)
         presenter.onGoodsRVReady()
@@ -73,7 +77,7 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
 
     override fun changeFab() {
         navigator?.setFabClickListener {
-            Snackbar.make(it, "Hi from Goods!", Snackbar.LENGTH_LONG).show()
+            showEditDialog()
         }
     }
 
@@ -84,6 +88,11 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
 
     override fun setItems(items: List<Good>) {
         adapter?.setGoodsAndCalculateDiff(items)
+    }
+
+    private fun showEditDialog(good: Good? = null) {
+        val dialogFragment = getGoodEditDialog(good)
+        dialogFragment.show(childFragmentManager, dialogFragment::class.java.name)
     }
 
     inner class GoodsListAdapter(private val onItemClickListener : (item : Good) -> Boolean) : RecyclerView.Adapter<GoodHolder>() {
