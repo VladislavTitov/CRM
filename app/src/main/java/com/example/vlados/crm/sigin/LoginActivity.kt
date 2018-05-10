@@ -1,7 +1,9 @@
 package com.example.vlados.crm.sigin
 
+import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -62,6 +64,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
 
         savedInstanceState?.getBoolean(loadingKey, false)?.let { showProgress(it) }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(arrayOf(
+                    Manifest.permission.INTERNET
+            ), 0)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
