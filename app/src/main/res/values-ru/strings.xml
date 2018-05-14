@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="cashier">Кассир</string>
+    <string name="manager">Менеджер</string>
+    <string name="admin">Администратор сети</string>
+
 
     <!-- Strings related to login -->
     <string name="title_activity_login">Вход</string>
@@ -19,7 +23,7 @@
 
 
     <!--Titles-->
-    <string name="title_honor_board">Honor board</string>
+    <string name="title_honor_board">Отзывы</string>
     <string name="title_chat">Чат</string>
     <string name="title_sales">Скидки</string>
     <string name="title_accounts">Учетные записи</string>
@@ -30,4 +34,6 @@
 
     <string name="offered_sales_title">В процессе</string>
     <string name="approved_sales_title">Одобренные</string>
+    <string name="approve_label">Одобрен</string>
+
 </resources>

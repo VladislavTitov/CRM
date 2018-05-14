@@ -4,9 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.*
 
-/**
- * Created by Daria Popova on 04.05.18.
- */
+
 data class Shop(val id: Long = Random().nextLong(),
                 var name: String = UUID.randomUUID().toString(),
                 var address: String = UUID.randomUUID().toString()) : Parcelable {

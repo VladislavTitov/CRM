@@ -2,7 +2,6 @@ package com.example.vlados.crm.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
@@ -29,6 +28,7 @@ fun Fragment.getGoodsFragment(): Fragment {
 }
 
 class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
+
 
     @InjectPresenter
     lateinit var presenter: GoodsPresenter
@@ -131,6 +131,8 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
         }
 
     }
+
+   
 
     inner class GoodHolder(itemView: View?, private val onItemClickListener : (item : Good) -> Boolean,
                            private val onItemChange: (Int) -> Unit) : RecyclerView.ViewHolder(itemView) {

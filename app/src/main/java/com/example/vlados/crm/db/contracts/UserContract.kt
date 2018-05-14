@@ -24,10 +24,10 @@ class UserContract {
 
         fun toContentValues(user : User) : ContentValues {
             val values = ContentValues()
-            if (user.id > 0) {
+            if (user.id!! > 0) {
                 values.put(UserContractEntry.ID, user.id)
             }
-            values.put(UserContractEntry.USERNAME, user.username)
+            values.put(UserContractEntry.USERNAME, user.email)
             values.put(UserContractEntry.PASSWORD, user.password)
             values.put(UserContractEntry.ROLE, user.role)
             return values
@@ -43,8 +43,8 @@ class UserContract {
                 val username = cursor.getString(cursor.getColumnIndex(UserContractEntry.USERNAME))
                 val password = cursor.getString(cursor.getColumnIndex(UserContractEntry.PASSWORD))
                 val role = cursor.getString(cursor.getColumnIndex(UserContractEntry.ROLE))
-                val user = User(id, username, password, role)
-                userList.add(user)
+//                val user = User(id, username, password, role)
+//                userList.add(user)
             }
             return userList
         }

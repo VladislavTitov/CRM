@@ -23,4 +23,5 @@ private fun create(): Retrofit {
 object ApiMethods {
     val get: GetMethods = create().create(GetMethods::class.java)
     val post: PostMethods = create().create(PostMethods::class.java)
+    val patch: PatchMethods = create().create(PatchMethods::class.java)
 }

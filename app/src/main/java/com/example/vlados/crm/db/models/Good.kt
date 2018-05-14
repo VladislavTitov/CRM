@@ -36,5 +36,4 @@ data class Good(val id : Long,
             return arrayOfNulls(size)
         }
     }
-
 }

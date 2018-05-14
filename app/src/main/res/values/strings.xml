@@ -3,8 +3,8 @@
 
     <!--Roles-->
     <string name="cashier">Cashier</string>
-    <string name="shop_admin">Administrator of shop</string>
-    <string name="net_admin">Administrator of net</string>
+    <string name="manager">Manager</string>
+    <string name="admin">Administrator of net</string>
 
     <string name="title_activity_login">Sign in</string>
 
@@ -46,7 +46,7 @@
     <string name="company_label">Сеть магазинов</string>
     <string name="store_label">Магазин</string>
     <string name="address_label">Адрес</string>
-    <string name="login_label">Логин</string>
+    <string name="email_label">Email</string>
     <string name="password_label">Пароль</string>
     <string name="name_label">Имя</string>
     <string name="surname_label">Фамилия</string>
@@ -67,5 +67,9 @@
     <string name="admin_fio_label">Имя администратора</string>
     <string name="title_label">Название</string>
     <string name="empty_error_text">Заполните это поле</string>
+    <string name="username_label">Логин</string>
+    <string name="review_hint">Введите отзыв</string>
+    <string name="review_send">Отправить</string>
+    <string name="approve_label">Approved</string>
 
 </resources>

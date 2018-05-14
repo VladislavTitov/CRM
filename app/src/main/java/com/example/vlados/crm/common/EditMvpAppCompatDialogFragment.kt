@@ -7,10 +7,8 @@ import android.view.View
 import android.widget.EditText
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 
-/**
- * Created by Daria Popova on 04.05.18.
- */
-abstract class EditMvpAppCompatDialogFragment : MvpAppCompatDialogFragment() {
+
+abstract class EditMvpAppCompatDialogFragment : MvpAppCompatDialogFragment(){
 
     abstract fun checkCorrectness(view: View): Boolean
 
@@ -31,5 +29,9 @@ abstract class EditMvpAppCompatDialogFragment : MvpAppCompatDialogFragment() {
             val posButton = d.getButton(Dialog.BUTTON_POSITIVE)
             posButton.setOnClickListener { save(view) }
         }
+    }
+
+    fun getFromEdit(edit: EditText): String {
+        return edit.text.toString()
     }
 }
