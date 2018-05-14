@@ -61,31 +61,31 @@ class UserEditFragment : EditMvpAppCompatDialogFragment(), UserEditInterface {
         var result = true
         val message = getString(R.string.empty_error_text)
         if (isEmpty(view.userEditName)) {
-            setEmptyError(view.userEditName, message)
+            setError(view.userEditName, message)
             result = false
         }
         if (isEmpty(view.userEditEmail)) {
-            setEmptyError(view.userEditEmail, message)
+            setError(view.userEditEmail, message)
             result = false
         }
         if (isEmpty(view.userEditSurname)) {
-            setEmptyError(view.userEditSurname, message)
+            setError(view.userEditSurname, message)
             result = false
         }
         if (isEmpty(view.userEditPassword)) {
-            setEmptyError(view.userEditPassword, message)
+            setError(view.userEditPassword, message)
             result = false
         }
 //        if (isEmpty(view.userEditAddress)) {
-//            setEmptyError(view.userEditAddress, message)
+//            setError(view.userEditAddress, message)
 //            result = false
 //        }
 //        if (isEmpty(view.userEditStore)) {
-//            setEmptyError(view.userEditStore, message)
+//            setError(view.userEditStore, message)
 //            result = false
 //        }
         if (isEmpty(view.userEditUsername)) {
-            setEmptyError(view.userEditUsername, message)
+            setError(view.userEditUsername, message)
             result = false
         }
         

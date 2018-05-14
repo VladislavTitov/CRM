@@ -71,5 +71,7 @@
     <string name="review_hint">Введите отзыв</string>
     <string name="review_send">Отправить</string>
     <string name="approve_label">Approved</string>
+    <string name="min_max_error">Введите значение от 0 до 100</string>
+    <string name="date_error">Введите верные даты</string>
 
 </resources>

@@ -38,6 +38,8 @@ fun Context.getDiscountEditFragment(discount: Discount? = null): DialogFragment 
 
 class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInterface {
     
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+    
     @InjectPresenter
     lateinit var presenter: DiscountEditPresenter
     
@@ -49,36 +51,56 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
     override fun setGoods(items: List<Good>, dialogView: View) {
         val goodsAdapter = GoodsArrayAdapter(context, items)
         dialogView.discountEditGood.adapter = goodsAdapter
-        
         dialogView.discountEditGood.setSelection(goodsAdapter.getPosition(discount?.good))
     }
     
     override fun checkCorrectness(view: View): Boolean {
         var result = true
         val message = getString(R.string.empty_error_text)
+        
+        
+        var dateEmpty = false
         if (isEmpty(view.editSaleToDate)) {
-            setEmptyError(view.editSaleToDate, message)
+            setError(view.editSaleToDate, message)
             result = false
+            dateEmpty = true
         }
         if (isEmpty(view.editSaleFromDate)) {
-            setEmptyError(view.editSaleFromDate, message)
+            setError(view.editSaleFromDate, message)
             result = false
+            dateEmpty = true
         }
+        
+        if (!dateEmpty) {
+            val to: Date = dateFormat.parse(getFromEdit(view.editSaleToDate))
+            val from: Date = dateFormat.parse(getFromEdit(view.editSaleFromDate))
+            if (from.after(to)) {
+                setError(view.editSaleToDate, getString(R.string.date_error))
+                setError(view.editSaleFromDate, getString(R.string.date_error))
+                result = false
+            }
+        }
+        
+        
         when (view.editSaleType2RG.checkedRadioButtonId) {
             R.id.editSalePercentRadio -> {
                 if (isEmpty(view.editSalePercent)) {
-                    setEmptyError(view.editSalePercent, message)
+                    setError(view.editSalePercent, message)
+                    result = false
+                } else if (Integer.valueOf(view.editSalePercent.text.toString()) > 100) {
+                    setError(view.editSalePercent, getString(R.string.min_max_error))
                     result = false
                 }
             }
             
             R.id.editSaleForAmountRadio -> {
                 if (isEmpty(view.editSaleForAmount)) {
-                    setEmptyError(view.editSaleForAmount, message)
+                    setError(view.editSaleForAmount, message)
                     result = false
                 }
             }
         }
+        
         return result
     }
     
@@ -103,6 +125,10 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
             false -> view.editDiscountApproved.setChecked(false)
         }
         
+        if (discount?.to != null)
+            view.editSaleToDate.setText(dateFormat.format(discount?.to))
+        if (discount?.from != null)
+            view.editSaleFromDate.setText(dateFormat.format(discount?.from))
         
         when (discount?.type) {
             "percents" -> {
@@ -114,9 +140,8 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
                 view.editSaleType2RG.check(R.id.editSaleForAmountRadio)
                 view.editSaleForAmount.setText(discount?.value)
                 onTypeChecked(R.id.editSaleForAmountRadio, view)
-             }
+            }
         }
-        
         
         
     }
@@ -154,8 +179,6 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
     }
     
     private fun updateEditTextDate(editText: EditText, salesCalendar: Calendar) {
-        val format = "dd/MM/yyyy"
-        val dateFormat = SimpleDateFormat(format)
         editText.setText(dateFormat.format(salesCalendar.time))
     }
     
@@ -213,10 +236,12 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
         if (discount == null)
             discount = Discount()
         
-        var good = view.discountEditGood.selectedItem as Good
+        val good = view.discountEditGood.selectedItem as Good
         discount?.good = good.id
         discount?.approved = view.editDiscountApproved.isChecked
         
+        discount?.to = dateFormat.parse(getFromEdit(view.editSaleToDate))
+        discount?.from = dateFormat.parse(getFromEdit(view.editSaleFromDate))
         
         when (view.editSaleType1RG.checkedRadioButtonId) {
         

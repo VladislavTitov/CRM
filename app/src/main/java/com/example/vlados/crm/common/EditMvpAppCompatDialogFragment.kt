@@ -17,7 +17,7 @@ abstract class EditMvpAppCompatDialogFragment : MvpAppCompatDialogFragment(){
         return TextUtils.isEmpty(edit.text.toString())
     }
 
-    fun setEmptyError(edit: EditText?, message: String) {
+    fun setError(edit: EditText?, message: String) {
         edit?.setError(message)
     }
 
