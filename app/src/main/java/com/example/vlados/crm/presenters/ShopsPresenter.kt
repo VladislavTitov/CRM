@@ -14,10 +14,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 @InjectViewState
 class ShopsPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<Shop>>() {
 
+    var shops = listOf<Shop>()
 
     fun onItemsReady() {
         ApiMethods.get.getAllShops().observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    shops = it
                     viewState.setItems(it)
                 }, {
                     it.printStackTrace()

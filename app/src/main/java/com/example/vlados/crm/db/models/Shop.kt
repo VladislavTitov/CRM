@@ -5,9 +5,9 @@ import android.os.Parcelable
 import java.util.*
 
 
-data class Shop(val id: Long = Random().nextLong(),
-                var name: String = UUID.randomUUID().toString(),
-                var address: String = UUID.randomUUID().toString()) : Parcelable {
+data class Shop(val id: Long?,
+                var name: String,
+                var address: String) : Parcelable {
 
     constructor(source: Parcel) : this(
             source.readLong(),
@@ -18,7 +18,9 @@ data class Shop(val id: Long = Random().nextLong(),
     override fun describeContents() = 0
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeLong(id)
+        if (id != null) {
+            writeLong(id)
+        }
         writeString(name)
         writeString(address)
     }

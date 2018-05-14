@@ -3,6 +3,7 @@ package com.example.vlados.crm.ui.fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
+import com.example.vlados.crm.common.GenericDiffUtilsCallback
 import com.example.vlados.crm.common.ItemInterface
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.db.models.Shop
@@ -94,6 +96,7 @@ class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.Inn
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {
             changeFab()
+            setItems(presenter.shops)
         }
     }
     
@@ -128,7 +131,18 @@ class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.Inn
         }
         
         fun setItems(new: List<Shop>) {
+            val diffUtilsCallback = GenericDiffUtilsCallback<Shop>(shops, new, {oldPosition, newPosition ->
+                shops[oldPosition].id == new[newPosition].id
+            }, {oldPosition, newPosition ->
+                val oldItem = shops[oldPosition]
+                val newItem = new[newPosition]
+                oldItem.id == newItem.id &&
+                        oldItem.name == newItem.name &&
+                        oldItem.address == newItem.address
+            })
+            val result = DiffUtil.calculateDiff(diffUtilsCallback, false)
             shops = new
+            result.dispatchUpdatesTo(this)
         }
         
         inner class ShopHolder(override val containerView: View) :
