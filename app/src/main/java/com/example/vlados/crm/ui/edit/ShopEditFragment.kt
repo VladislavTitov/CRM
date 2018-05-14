@@ -31,15 +31,15 @@ class ShopEditFragment : EditMvpAppCompatDialogFragment() {
         var result = true
         val message = getString(R.string.empty_error_text)
         if (isEmpty(view.editShopAdminName)) {
-            setEmptyError(view.editShopAdminName, message)
+            setError(view.editShopAdminName, message)
             result = false
         }
         if (isEmpty(view.editShopName)) {
-            setEmptyError(view.editShopName, message)
+            setError(view.editShopName, message)
             result = false
         }
         if (isEmpty(view.editShopAddress)) {
-            setEmptyError(view.editShopAddress, message)
+            setError(view.editShopAddress, message)
             result = false
         }
 
