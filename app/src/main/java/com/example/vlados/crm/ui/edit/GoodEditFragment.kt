@@ -34,6 +34,7 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
     @InjectPresenter
     lateinit var presenter: GoodEditPresenter
     lateinit var layout: View
+    var good: Good? = null
 
     @ProvidePresenter
     fun providePresenter(): GoodEditPresenter {
@@ -46,7 +47,7 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
 
     override fun save(view: View) {
         view.sizes
-        presenter.onSave(view.name.text.toString(), view.price.text.toString().toInt(), view.kind.text.toString())
+        presenter.onSave(good?.id, view.name.text.toString(), view.price.text.toString().toInt(), view.kind.text.toString())
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -72,11 +73,11 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
     }
 
     fun bind(view: View) {
-        val good = arguments?.getParcelable<Good>(GOOD_KEY)
+        good = arguments?.getParcelable<Good>(GOOD_KEY)
         view.name.setText(good?.name)
         view.price.setText(good?.price?.toString())
         view.kind.setText(good?.kind)
-        view.sizes.setText(good?.sizes?.joinToString())
+        view.sizes.setText(good?.sizes)
     }
 
     override fun showLoading(isShown: Boolean) {

@@ -1,6 +1,7 @@
 package com.example.vlados.crm.network
 
 import com.example.vlados.crm.db.models.Discount
+import com.example.vlados.crm.db.models.Good
 import com.example.vlados.crm.db.models.User
 import io.reactivex.Single
 import retrofit2.http.Body
@@ -17,4 +18,7 @@ interface PatchMethods {
     
     @PATCH("discounts/{id}")
     fun patchDiscount(@Path("id") id: Int?, @Body discount: Discount?): Single<Discount>
+
+    @PATCH("goods/{id}")
+    fun patchGood(@Path("id") id: Long, @Body good: Good): Single<Good>
 }
