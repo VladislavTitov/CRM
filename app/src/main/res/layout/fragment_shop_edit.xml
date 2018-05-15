@@ -1,65 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:padding="16dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <TextView
-                android:textColor="@color/grey_text_color"
+            <TextView
                 style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/title_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textColor="@color/grey_text_color" />
 
-        <EditText
-                style="@style/TextAppearance.AppCompat.Medium"
-                tools:text="H&amp;M"
-                android:textColor="@color/grey_text_color"
-                android:textStyle="bold"
+            <EditText
                 android:id="@+id/editShopName"
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <TextView
+                android:layout_height="wrap_content"
                 android:textColor="@color/grey_text_color"
+                android:textStyle="bold"
+                tools:text="H&amp;M" />
+
+            <TextView
                 style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/address_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textColor="@color/grey_text_color" />
 
-        <EditText
+            <EditText
+                android:id="@+id/editShopAddress"
                 style="@style/TextAppearance.AppCompat.Medium"
-                tools:text="ТЦ Мега, проспект Победы 141"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textColor="@color/grey_text_color"
                 android:textStyle="bold"
-                android:id="@+id/editShopAddress"
+                tools:text="ТЦ Мега, проспект Победы 141" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/admin_fio_label"
+                android:textColor="@color/grey_text_color" />
+
+            <LinearLayout
+                android:id="@+id/users"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:text="@string/cancel_label"
+                    android:textColor="@color/colorAccent" />
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:text="@string/save_label"
+                    android:textColor="@color/colorAccent" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <TextView
-                android:textColor="@color/grey_text_color"
-                style="@style/TextAppearance.AppCompat.Small"
-                android:text="@string/admin_fio_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <EditText
-                style="@style/TextAppearance.AppCompat.Medium"
-                tools:text="Николай Федоров"
-                android:textColor="@color/grey_text_color"
-                android:textStyle="bold"
-                android:id="@+id/editShopAdminName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/loading_label" />
     </LinearLayout>
-</ScrollView>
+
+</LinearLayout>

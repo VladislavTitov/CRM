@@ -3,6 +3,7 @@ package com.example.vlados.crm.network
 import com.example.vlados.crm.db.models.*
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface GetMethods {
     
@@ -11,6 +12,9 @@ interface GetMethods {
     
     @GET("users")
     fun getAllUsers(): Single<List<User>>
+
+    @GET("users")
+    fun getRoledUsers(@Query("role") role: String): Single<List<User>>
     
     @GET("reviews")
     fun getAllReviews(): Single<List<Review>>

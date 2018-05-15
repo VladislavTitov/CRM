@@ -13,10 +13,7 @@ import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
-import com.example.vlados.crm.common.GenericDiffUtilsCallback
-import com.example.vlados.crm.common.ItemInterface
-import com.example.vlados.crm.common.NavMvpAppCompatFragment
-import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.common.*
 import com.example.vlados.crm.db.models.Good
 import com.example.vlados.crm.presenters.GoodsPresenter
 import com.example.vlados.crm.ui.edit.getGoodEditDialog
@@ -27,8 +24,7 @@ fun Fragment.getGoodsFragment(): Fragment {
     return fragment
 }
 
-class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
-
+class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good>, EditObserver {
 
     @InjectPresenter
     lateinit var presenter: GoodsPresenter
@@ -88,6 +84,10 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
 
     override fun setItems(items: List<Good>) {
         adapter?.setGoodsAndCalculateDiff(items)
+    }
+
+    override fun onEditEnd() {
+        presenter.onGoodsRVReady()
     }
 
     private fun showEditDialog(good: Good? = null) {

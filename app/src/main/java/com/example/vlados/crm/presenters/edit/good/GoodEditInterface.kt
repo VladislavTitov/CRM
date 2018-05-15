@@ -10,4 +10,6 @@ interface GoodEditInterface : MvpView {
 
     fun showMessage(message: String)
 
+    fun notifyObserver()
+
 }

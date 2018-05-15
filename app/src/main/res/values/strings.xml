@@ -72,4 +72,8 @@
     <string name="review_send">Отправить</string>
     <string name="approve_label">Approved</string>
 
+
+    <!--Commons-->
+    <string name="loading_label">Loading</string>
+
 </resources>

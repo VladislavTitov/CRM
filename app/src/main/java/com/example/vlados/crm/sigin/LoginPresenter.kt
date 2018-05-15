@@ -3,6 +3,7 @@ package com.example.vlados.crm.sigin
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.vlados.crm.ADMIN
+import com.example.vlados.crm.MANAGER
 import io.reactivex.disposables.Disposable
 
 /**
