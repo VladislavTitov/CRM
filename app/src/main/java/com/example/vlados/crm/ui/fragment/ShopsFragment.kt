@@ -13,6 +13,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
+import com.example.vlados.crm.common.EditObserver
 import com.example.vlados.crm.common.GenericDiffUtilsCallback
 import com.example.vlados.crm.common.ItemInterface
 import com.example.vlados.crm.common.Navigator
@@ -29,9 +30,9 @@ fun Context.getShopsFragment(): Fragment {
     return fragment
 }
 
-class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.InnerNavigator {
-    
-    
+class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.InnerNavigator, EditObserver {
+
+
     override fun changeFab() {
         navigator?.setFabClickListener { onFabClick() }
     }
@@ -58,7 +59,7 @@ class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.Inn
     
     
     public fun onFabClick() {
-        context.getShopEditFragment().show(fragmentManager, "");
+        context.getShopEditFragment().show(childFragmentManager, "");
     }
     
  
@@ -85,7 +86,10 @@ class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.Inn
     }
     
     fun init() {
-        shopAdapter = ShopAdapter()
+        shopAdapter = ShopAdapter{
+            context.getShopEditFragment(it).show(childFragmentManager, "")
+            return@ShopAdapter false
+        }
         shopsRV.adapter = shopAdapter
         shopsRV.layoutManager = LinearLayoutManager(context)
         presenter.onItemsReady()
@@ -109,8 +113,12 @@ class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.Inn
     override fun setItems(items: List<Shop>) {
         shopAdapter.setItems(items)
     }
+
+    override fun onEditEnd() {
+        presenter.onItemsReady()
+    }
     
-    inner class ShopAdapter(/*private val onItemClickLister: (item: Shop) -> Boolean*/) :
+    inner class ShopAdapter(private val onItemClickListener: (item: Shop) -> Boolean) :
             RecyclerView.Adapter<ShopAdapter.ShopHolder>() {
         
         var shops = listOf<Shop>()
@@ -152,7 +160,9 @@ class ShopsFragment : MvpAppCompatFragment(), ItemInterface<Shop>, Navigator.Inn
             fun bind(shop: Shop, position: Int) {
                 shopName.text = shop.name
                 shopAddress.text = shop.address
-                
+                containerView.setOnClickListener {
+                    onItemClickListener(shop)
+                }
             }
             
             

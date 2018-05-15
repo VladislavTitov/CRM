@@ -9,14 +9,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
-import com.example.vlados.crm.common.GenericDiffUtilsCallback
-import com.example.vlados.crm.common.ItemInterface
-import com.example.vlados.crm.common.NavMvpAppCompatFragment
-import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.common.*
 import com.example.vlados.crm.db.models.Good
 import com.example.vlados.crm.presenters.GoodsPresenter
 import com.example.vlados.crm.ui.edit.getGoodEditDialog
@@ -27,8 +25,7 @@ fun Fragment.getGoodsFragment(): Fragment {
     return fragment
 }
 
-class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
-
+class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good>, EditObserver {
 
     @InjectPresenter
     lateinit var presenter: GoodsPresenter
@@ -90,6 +87,10 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
         adapter?.setGoodsAndCalculateDiff(items)
     }
 
+    override fun onEditEnd() {
+        presenter.onGoodsRVReady()
+    }
+
     private fun showEditDialog(good: Good? = null) {
         val dialogFragment = getGoodEditDialog(good)
         dialogFragment.show(childFragmentManager, dialogFragment::class.java.name)
@@ -145,6 +146,19 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good> {
                 if (onItemClickListener(item)) {
                     onItemChange(position)
                 }
+            }
+            itemView.setOnLongClickListener {
+                val menu = PopupMenu(context, it)
+                menu.inflate(R.menu.item_menu)
+                menu.setOnMenuItemClickListener {
+                    if (it.itemId == R.id.delete) {
+                        item.id?.let { it1 -> presenter.deleteGood(it1) }
+                        return@setOnMenuItemClickListener true
+                    }
+                    return@setOnMenuItemClickListener false
+                }
+                menu.show()
+                return@setOnLongClickListener true
             }
         }
 

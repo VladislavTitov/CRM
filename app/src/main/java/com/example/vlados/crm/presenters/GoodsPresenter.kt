@@ -11,9 +11,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 @InjectViewState
 class GoodsPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<Good>>() {
 
+    var goods: MutableList<Good>? = null
+
     fun onGoodsRVReady() {
         ApiMethods.get.getAllGoods().observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
+                    goods = it
                     viewState.setItems(it)
                 }, {
                     it.printStackTrace()
@@ -23,6 +26,35 @@ class GoodsPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<Goo
 
     fun onItemClick(item : Good) : Boolean {
         return false
+    }
+
+    fun deleteGood(goodId: Long) {
+        ApiMethods.delete.deleteGood(goodId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    /*if (removeGood(it)) {
+                        viewState.setItems(goods ?: mutableListOf())
+                    }*/
+                    onGoodsRVReady()
+                }, {
+                    it.printStackTrace()
+                    navigator?.showSnack("Error!")
+                })
+    }
+
+    private fun removeGood(good: Good): Boolean {
+        if (goods == null) {
+            return false
+        }
+        var deletingGood: Good? = null
+        for (item in goods!!) {
+            if (item.id == good.id) {
+                deletingGood = item
+                break
+            }
+        }
+        if (deletingGood == null) return false
+        return goods?.remove(deletingGood) ?: false
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.vlados.crm.ui.edit
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.EditMvpAppCompatDialogFragment
+import com.example.vlados.crm.common.EditObserver
 import com.example.vlados.crm.db.models.Good
 import com.example.vlados.crm.presenters.edit.good.GoodEditInterface
 import com.example.vlados.crm.presenters.edit.good.GoodEditPresenter
@@ -34,6 +36,7 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
     @InjectPresenter
     lateinit var presenter: GoodEditPresenter
     lateinit var layout: View
+    var editObserver: EditObserver? = null
     var good: Good? = null
 
     @ProvidePresenter
@@ -46,8 +49,16 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
     }
 
     override fun save(view: View) {
-        view.sizes
-        presenter.onSave(good?.id, view.name.text.toString(), view.price.text.toString().toInt(), view.kind.text.toString())
+        presenter.onSave(good?.id,
+                view.name.text.toString(),
+                view.price.text.toString().toInt(),
+                view.kind.text.toString(),
+                view.sizes.text.toString())
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        editObserver = (parentFragment as EditObserver)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -92,5 +103,10 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
 
     override fun showMessage(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun notifyObserver() {
+        editObserver?.onEditEnd()
+
     }
 }

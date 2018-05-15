@@ -36,4 +36,49 @@
     <string name="approved_sales_title">Одобренные</string>
     <string name="approve_label">Одобрен</string>
 
+    <!--Accounts labels-->
+    <string name="company_label">Сеть магазинов</string>
+    <string name="store_label">Магазин</string>
+    <string name="address_label">Адрес</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Пароль</string>
+    <string name="name_label">Имя</string>
+    <string name="surname_label">Фамилия</string>
+    <string name="job_label">Статус</string>
+
+    <!--<string name="button_main_label">Главная</string>-->
+
+    <!--Discounts label-->
+    <string name="sale_for_one_label">На 1 товар</string>
+    <string name="sale_for_all_label">На всю покупку</string>
+    <string name="sale_for_percent_label">Проценты</string>
+    <string name="sale_for_amount_label">Количетсвенно</string>
+    <string name="sale_amout_label">руб.</string>
+    <string name="sale_percent_label">%</string>
+    <string name="from_label">С</string>
+    <string name="to_label">до</string>
+    <string name="offer_label">Предложить</string>
+    <string name="admin_fio_label">Имя администратора</string>
+    <string name="title_label">Название</string>
+
+    <string name="username_label">Логин</string>
+    <string name="review_hint">Введите отзыв</string>
+    <string name="review_send">Отправить</string>
+
+
+    <!--Commons-->
+    <string name="loading_label">Загрузка</string>
+    <string name="delete_label">Удалить</string>
+    <string name="edit_label">Изменить</string>
+    <string name="save_label">Сохранить</string>
+    <string name="cancel_label">Отмена</string>
+    <string name="empty_error_text">Заполните это поле</string>
+
+    <!--Good edit labels-->
+    <string name="change_good_label">Изменить товар</string>
+    <string name="good_name">Название</string>
+    <string name="good_price">Цена</string>
+    <string name="good_kind">Тип</string>
+    <string name="good_sizes">Размеры</string>
+
 </resources>

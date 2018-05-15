@@ -43,35 +43,52 @@
     <string name="approved_sales_title">Approved</string>
 
     <!--Accounts labels-->
-    <string name="company_label">Сеть магазинов</string>
-    <string name="store_label">Магазин</string>
-    <string name="address_label">Адрес</string>
+    <string name="company_label">Shop network</string>
+    <string name="store_label">Shop</string>
+    <string name="address_label">Address</string>
     <string name="email_label">Email</string>
-    <string name="password_label">Пароль</string>
-    <string name="name_label">Имя</string>
-    <string name="surname_label">Фамилия</string>
-    <string name="job_label">Статус</string>
-    <string name="edit_label">Изменить</string>
-    <string name="save_label">Сохранить</string>
-    <string name="cancel_label">Отмена</string>
-    <string name="button_main_label">Главная</string>
-    <string name="sale_for_one_label">На 1 товар</string>
-    <string name="sale_for_all_label">На всю покупку</string>
-    <string name="sale_for_percent_label">Проценты</string>
-    <string name="sale_for_amount_label">Количетсвенно</string>
+    <string name="password_label">Password</string>
+    <string name="name_label">Name</string>
+    <string name="surname_label">Surname</string>
+    <string name="job_label">Status</string>
+
+    <!--<string name="button_main_label">Главная</string>-->
+
+    <!--Discounts label-->
+    <string name="sale_for_one_label">For 1 good</string>
+    <string name="sale_for_all_label">For all purchase</string>
+    <string name="sale_for_percent_label">Percents</string>
+    <string name="sale_for_amount_label">Amount</string>
     <string name="sale_amout_label">руб.</string>
     <string name="sale_percent_label">%</string>
-    <string name="from_label">С</string>
-    <string name="to_label">до</string>
+    <string name="from_label">From</string>
+    <string name="to_label">to</string>
     <string name="offer_label">Предложить</string>
-    <string name="admin_fio_label">Имя администратора</string>
-    <string name="title_label">Название</string>
-    <string name="empty_error_text">Заполните это поле</string>
-    <string name="username_label">Логин</string>
-    <string name="review_hint">Введите отзыв</string>
-    <string name="review_send">Отправить</string>
+    <string name="admin_fio_label">Administrator name</string>
+    <string name="title_label">Name</string>
+
+    <string name="username_label">Login</string>
+    <string name="review_hint">Enter review</string>
+    <string name="review_send">Send</string>
     <string name="approve_label">Approved</string>
     <string name="min_max_error">Введите значение от 0 до 100</string>
     <string name="date_error">Введите верные даты</string>
+
+
+    <!--Commons-->
+    <string name="loading_label">Loading</string>
+    <string name="delete_label">Delete</string>
+    <string name="edit_label">Edit</string>
+    <string name="save_label">Save</string>
+    <string name="cancel_label">Cancel</string>
+    <string name="empty_error_text">Specify this field</string>
+
+    <!--Good edit labels-->
+    <string name="change_good_label">Change good</string>
+    <string name="good_name">Name</string>
+    <string name="good_price">Price</string>
+    <string name="good_kind">Kind</string>
+    <string name="good_sizes">Sizes</string>
+
 
 </resources>

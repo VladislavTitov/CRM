@@ -12,11 +12,12 @@ class GoodEditPresenter(val isNew: Boolean) : MvpPresenter<GoodEditInterface>() 
     fun onSave(good: Good) {
         viewState.showLoading(true)
         if (isNew) {
-            ApiMethods.post.createGood(good.name, good.price, good.kind)
+            ApiMethods.post.createGood(good)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         viewState.showLoading(false)
                         if (it) {
+                            viewState.notifyObserver()
                             viewState.dismiss()
                         } else {
                             viewState.showMessage("New good is not created!")
@@ -27,11 +28,21 @@ class GoodEditPresenter(val isNew: Boolean) : MvpPresenter<GoodEditInterface>() 
                         viewState.showMessage("Error!")
                     })
         } else {
-            ApiMethods.patch.patchGood(good.id!!, good)
+            if (good.id == null) {
+                viewState.showMessage("Good id cannot be null!")
+                viewState.dismiss()
+                return
+            }
+            ApiMethods.patch.patchGood(good.id, good)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         viewState.showLoading(false)
-                        viewState.dismiss()
+                        if (it) {
+                            viewState.notifyObserver()
+                            viewState.dismiss()
+                        } else {
+                            viewState.showMessage("New good is not updated!")
+                        }
                     }, {
                         it.printStackTrace()
                         viewState.showLoading(false)

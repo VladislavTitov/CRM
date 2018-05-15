@@ -1,19 +1,16 @@
 package com.example.vlados.crm.network
 
-import com.example.vlados.crm.db.models.Discount
-import com.example.vlados.crm.db.models.Review
-import com.example.vlados.crm.db.models.User
-import com.example.vlados.crm.network.login.LoginResponse
+import com.example.vlados.crm.db.models.*
+import com.example.vlados.crm.network.login.LoginRequest
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface PostMethods {
     
-    @POST("")
-    fun login(): Single<LoginResponse>
+    @POST("login")
+    fun login(@Body body: LoginRequest): Single<User>
 
     @POST("users")
     fun postUser(@Body user: User?): Single<User>
@@ -25,5 +22,8 @@ interface PostMethods {
     fun postDiscount(@Body discount: Discount?): Single<Discount>
 
     @POST("goods")
-    fun createGood(@Query("good[name]") name: String, @Query("good[price]") price: Int, @Query("good[kind]") kind: String) : Single<Boolean>
+    fun createGood(@Body good: Good) : Single<Boolean>
+
+    @POST("shops")
+    fun createShop(@Body shop: Shop): Single<Boolean>
 }

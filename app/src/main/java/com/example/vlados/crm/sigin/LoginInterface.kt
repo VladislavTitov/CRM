@@ -9,4 +9,8 @@ interface LoginInterface : MvpView{
 
     fun goToMainActivity(role: String)
 
+    fun showMessage(text: String)
+
+    fun showProgress(show: Boolean)
+
 }

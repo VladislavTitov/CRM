@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 
-data class User(val id: Int? = null,
+data class User(val id: Long? = null,
                 var shop: String? = null,
                 var username: String? = null,
                 var address: String? = null,
@@ -13,6 +13,8 @@ data class User(val id: Int? = null,
                 @SerializedName("password_digest") var password: String? = null,
                 var name: String? = null,
                 var surname: String? = null,
+                @SerializedName("full_name") var fullname: String? = null,
+                var blocked: String? = null,
                 var role: String? = null) : Parcelable {
 
     public fun getFullName(): String {
@@ -20,7 +22,7 @@ data class User(val id: Int? = null,
     }
 
     constructor(source: Parcel) : this(
-            source.readValue(Int::class.java.classLoader) as Int?,
+            source.readValue(Long::class.java.classLoader) as Long?,
             source.readString(),
             source.readString(),
             source.readString(),
