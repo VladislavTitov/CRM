@@ -22,6 +22,7 @@ import com.example.vlados.crm.ui.holders.DiscountsHolderFragment
 import com.example.vlados.crm.ui.holders.GoodsAndShopsHolder
 import com.example.vlados.crm.ui.holders.GoodsShopsHolder
 import com.example.vlados.crm.ui.holders.getDiscountsHolderFragment
+import com.example.vlados.crm.utils.getCurrentUser
 import com.example.vlados.crm.utils.saveCurrentUser
 import kotlinx.android.synthetic.main.activity_navigation.*
 
@@ -59,10 +60,10 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
         
         nav_view.setNavigationItemSelectedListener(this)
         
-        val user = User(role = roleStr)
-        saveCurrentUser(user)
+//        val user = User(role = roleStr)
+//        saveCurrentUser(user)
         
-        nav_view.getHeaderView(0).findViewById<TextView>(R.id.name).text = "Titov Vladislav Sergeevich"
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.name).text = getCurrentUser()?.fullname
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.role).text = getString(mapToTitleId[roleStr]!!)
         
         nav_view.setCheckedItem(R.id.nav_honor)

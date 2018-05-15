@@ -5,12 +5,14 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
 import com.example.vlados.crm.ui.NavigationActivity
 import com.example.vlados.crm.utils.afterTextChanged
@@ -28,6 +30,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
     private var passwordText : String = ""
 
     private val loadingKey = "loading_key"
+
+    @ProvidePresenter
+    fun providePresenter(): LoginPresenter {
+        return LoginPresenter(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +119,6 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true)
             presenter.signIn(loginText, passwordText)
         }
     }
@@ -130,7 +136,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
     /**
      * Shows the progress UI and hides the login form.
      */
-    private fun showProgress(show: Boolean) {
+    override fun showProgress(show: Boolean) {
         val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
         login_form.visibility = if (show) View.GONE else View.VISIBLE
@@ -158,6 +164,10 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
     override fun goToMainActivity(role: String) {
         startActivity(NavigationActivity(role))
         finish()
+    }
+
+    override fun showMessage(text: String) {
+        Snackbar.make(login_layout, text, Snackbar.LENGTH_LONG)
     }
 
 }

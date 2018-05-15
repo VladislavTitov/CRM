@@ -13,6 +13,8 @@ data class User(val id: Long? = null,
                 @SerializedName("password_digest") var password: String? = null,
                 var name: String? = null,
                 var surname: String? = null,
+                @SerializedName("full_name") var fullname: String? = null,
+                var blocked: String? = null,
                 var role: String? = null) : Parcelable {
 
     public fun getFullName(): String {

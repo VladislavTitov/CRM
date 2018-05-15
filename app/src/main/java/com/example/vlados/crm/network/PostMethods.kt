@@ -1,17 +1,16 @@
 package com.example.vlados.crm.network
 
 import com.example.vlados.crm.db.models.*
-import com.example.vlados.crm.network.login.LoginResponse
+import com.example.vlados.crm.network.login.LoginRequest
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface PostMethods {
     
-    @POST("")
-    fun login(): Single<LoginResponse>
+    @POST("login")
+    fun login(@Body body: LoginRequest): Single<User>
 
     @POST("users")
     fun postUser(@Body user: User?): Single<User>
