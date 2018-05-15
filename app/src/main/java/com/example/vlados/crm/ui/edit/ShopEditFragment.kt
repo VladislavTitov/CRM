@@ -132,7 +132,7 @@ class ShopEditFragment : EditMvpAppCompatDialogFragment(), ShopEditInterface {
         spin = Spinner(context)
         val adapter = UsersArrayAdapter(context, users)
         spin?.adapter = adapter
-        spin?.setSelection(adapter.getPosition(shop?.id))
+        spin?.setSelection(adapter.getPosition(shop?.admin?.id))
         spin?.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         layout.users.addView(spin)
     }

@@ -2,6 +2,7 @@ package com.example.vlados.crm.network
 
 import com.example.vlados.crm.db.models.*
 import com.example.vlados.crm.network.login.LoginRequest
+import com.example.vlados.crm.network.shop.ShopCreateUpdateRequest
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -25,8 +26,9 @@ interface PostMethods {
     fun createGood(@Body good: Good) : Single<Boolean>
 
     @POST("shops")
-    fun createShop(@Body shop: Shop): Single<Boolean>
+    fun createShop(@Body shop: ShopCreateUpdateRequest): Single<Boolean>
     
     @POST("messages")
     fun postMessage(@Body message: Message): Single<Message>
+
 }

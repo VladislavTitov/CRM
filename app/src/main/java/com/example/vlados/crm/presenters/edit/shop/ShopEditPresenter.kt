@@ -4,8 +4,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.vlados.crm.MANAGER
 import com.example.vlados.crm.common.Navigator
-import com.example.vlados.crm.db.models.Shop
 import com.example.vlados.crm.network.ApiMethods
+import com.example.vlados.crm.network.shop.ShopCreateUpdateRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 @InjectViewState
@@ -23,10 +23,10 @@ class ShopEditPresenter(val isNew: Boolean, val navigator: Navigator) : MvpPrese
     }
 
     fun onSave(id: Long? = null, name: String, address: String, adminId: Long) {
-        onSave(Shop(id, name, address, adminId))
+        onSave(ShopCreateUpdateRequest(id, name, address, adminId))
     }
 
-    fun onSave(shop: Shop) {
+    fun onSave(shop: ShopCreateUpdateRequest) {
         viewState.showLoading(true)
         if (isNew) {
             ApiMethods.post.createShop(shop)

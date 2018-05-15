@@ -2,8 +2,8 @@ package com.example.vlados.crm.network
 
 import com.example.vlados.crm.db.models.Discount
 import com.example.vlados.crm.db.models.Good
-import com.example.vlados.crm.db.models.Shop
 import com.example.vlados.crm.db.models.User
+import com.example.vlados.crm.network.shop.ShopCreateUpdateRequest
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.PATCH
@@ -24,5 +24,5 @@ interface PatchMethods {
     fun patchGood(@Path("id") id: Long, @Body good: Good): Single<Boolean>
 
     @PATCH("shops/{id}")
-    fun patchShop(@Path("id") id: Long, @Body shop: Shop): Single<Boolean>
+    fun patchShop(@Path("id") id: Long, @Body shop: ShopCreateUpdateRequest): Single<Boolean>
 }

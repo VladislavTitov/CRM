@@ -2,20 +2,18 @@ package com.example.vlados.crm.db.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import java.util.*
 
 
 data class Shop(val id: Long?,
                 var name: String,
                 var address: String,
-                @SerializedName("admin_id") var adminId: Long? = null) : Parcelable {
+                var admin: User? = null) : Parcelable {
 
     constructor(source: Parcel) : this(
             source.readLong(),
             source.readString(),
             source.readString(),
-            source.readValue(Long::class.java.classLoader) as Long?
+            source.readValue(User::class.java.classLoader) as User?
     )
 
     override fun describeContents() = 0
@@ -26,7 +24,7 @@ data class Shop(val id: Long?,
         }
         writeString(name)
         writeString(address)
-        writeValue(adminId)
+        writeValue(admin)
     }
 
     companion object {
