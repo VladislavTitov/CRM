@@ -15,7 +15,7 @@ class MessagesPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<
     var dialogMessages: List<Message> = mutableListOf()
     var messages: List<Message> = mutableListOf()
     
-    fun onReady(userId: Long?) {
+    fun onDialogReady(userId: Long?) {
         ApiMethods.get.getAllFromMessages(userId).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     sortMessages(it, userId)
@@ -65,8 +65,7 @@ class MessagesPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<
     private fun sortForDialog() {
         dialogMessages = mutableListOf()
         for (entry in messagesMap) {
-            entry.value.sortedBy { message -> message.id }
-            val list = entry.value
+            val list = entry.value.sortedBy { message -> message.id }
             dialogMessages += list[list.size - 1]
         }
     }
