@@ -20,6 +20,7 @@ import com.example.vlados.crm.common.NavMvpAppCompatFragment
 import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.db.models.Review
 import com.example.vlados.crm.presenters.ReviewsPresenter
+import com.example.vlados.crm.utils.getCurrentUser
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_reviews.*
 import kotlinx.android.synthetic.main.item_review.*
@@ -91,7 +92,9 @@ class ReviewsFragment : NavMvpAppCompatFragment(), ItemInterface<Review> {
         if (TextUtils.isEmpty(content))
             reviewAddContent.setError(getString(R.string.empty_error_text))
         else {
-            val review = Review(content = content, userId = 1, reviewUserId = 2)
+            val current = context.getCurrentUser()
+            val review = Review(content = content, userId = current?.id, reviewUserId = current?.id,
+                    reviewedUser = current, reviewer = current)
             presenter.save(review)
             clearReview()
         }
@@ -135,7 +138,11 @@ class ReviewsFragment : NavMvpAppCompatFragment(), ItemInterface<Review> {
                     { oldPosition, newPosition ->
                         val oldItem = reviews[oldPosition]
                         val newItem = aNew[newPosition]
-                        oldItem.content == newItem.content
+                        oldItem.content == newItem.content &&
+                                oldItem.reviewer == newItem.reviewer &&
+                                oldItem.reviewedUser == newItem.reviewedUser &&
+                                oldItem.userId == newItem.userId &&
+                                oldItem.reviewUserId == newItem.reviewUserId
                     }
             )
             val result = DiffUtil.calculateDiff(diffUtilsCallback, false)
@@ -150,8 +157,9 @@ class ReviewsFragment : NavMvpAppCompatFragment(), ItemInterface<Review> {
             
             fun bind(review: Review, position: Int) {
                 
+                reviewUserName.text = review.reviewer?.fullName
                 reviewContent.text = review.content
-                when (position % 5){
+                when (position % 5) {
                     0 -> reviewAvatar.setImageResource(R.drawable.ic_sentiment_dissatisfied_black_24dp)
                     1 -> reviewAvatar.setImageResource(R.drawable.ic_sentiment_neutral_24dp)
                     2 -> reviewAvatar.setImageResource(R.drawable.ic_sentiment_satisfied_24dp)

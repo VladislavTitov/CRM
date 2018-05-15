@@ -3,7 +3,6 @@ package com.example.vlados.crm.ui.edit
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,10 +44,32 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
     }
 
     override fun checkCorrectness(view: View): Boolean {
-        return true
+        var result = true
+        val message = getString(R.string.empty_error_text)
+        
+        if (isEmpty(view.name)) {
+            setError(view.name, message)
+            result = false
+        }
+        if (isEmpty(view.price)) {
+            setError(view.price, message)
+            result = false
+        }
+        if (isEmpty(view.kind)) {
+            setError(view.kind, message)
+            result = false
+        }
+        if (isEmpty(view.sizes)) {
+            setError(view.sizes, message)
+            result = false
+        }
+        return result
     }
 
     override fun save(view: View) {
+       if(checkCorrectness(view)){
+           presenter.onSave(good?.id, view.name.text.toString(), view.price.text.toString().toInt(), view.kind.text.toString())
+       }
         presenter.onSave(good?.id,
                 view.name.text.toString(),
                 view.price.text.toString().toInt(),

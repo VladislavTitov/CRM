@@ -14,7 +14,6 @@ import android.widget.EditText
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.ADMIN
-import com.example.vlados.crm.MANAGER
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.EditMvpAppCompatDialogFragment
 import com.example.vlados.crm.common.GoodsArrayAdapter
@@ -185,6 +184,7 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
     
     private fun updateEditTextDate(editText: EditText, salesCalendar: Calendar) {
         editText.setText(dateFormat.format(salesCalendar.time))
+        editText.error = null
     }
     
     private fun onGoodAllChecked(checkedId: Int, view: View) {
@@ -228,6 +228,10 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
                     this@DiscountEditFragment.dialog.cancel()
                 }
             })
+        }
+    
+        if (context.getCurrentUser()?.role != ADMIN) {
+           view.editDiscountApproved.visibility  = View.GONE
         }
         
         bindDiscount(view)

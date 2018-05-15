@@ -16,7 +16,7 @@ interface PostMethods {
     fun postUser(@Body user: User?): Single<User>
     
     @POST("users/{user_id}/reviews")
-    fun postReview(@Path("user_id") userId: Int, @Body review: Review): Single<Review>
+    fun postReview(@Path("user_id") userId: Long?, @Body review: Review): Single<Review>
     
     @POST("discounts")
     fun postDiscount(@Body discount: Discount?): Single<Discount>
@@ -26,4 +26,7 @@ interface PostMethods {
 
     @POST("shops")
     fun createShop(@Body shop: Shop): Single<Boolean>
+    
+    @POST("messages")
+    fun postMessage(@Body message: Message): Single<Message>
 }

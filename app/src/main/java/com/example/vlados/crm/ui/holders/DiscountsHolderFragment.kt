@@ -85,8 +85,8 @@ class DiscountsHolderFragment : MvpAppCompatFragment(), ItemInterface<Discount> 
                 return calledFragment
             }
             calledFragment = when (position) {
-                1 -> context.getDiscountsFragment(false)
-                0 -> context.getDiscountsFragment(true)
+                0 -> context.getDiscountsFragment(false)
+                1 -> context.getDiscountsFragment(true)
                 else -> context.getDiscountsFragment(true)
             }
             fragments.put(position, calledFragment)
@@ -99,8 +99,8 @@ class DiscountsHolderFragment : MvpAppCompatFragment(), ItemInterface<Discount> 
         
         override fun getPageTitle(position: Int): CharSequence {
             return when (position) {
-                1 -> getString(R.string.offered_sales_title)
-                0 -> getString(R.string.approved_sales_title)
+                0 -> getString(R.string.offered_sales_title)
+                1 -> getString(R.string.approved_sales_title)
                 else -> getString(R.string.offered_sales_title)
             }
         }

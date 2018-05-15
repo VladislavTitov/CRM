@@ -13,17 +13,12 @@ import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.vlados.crm.*
 import com.example.vlados.crm.common.Navigator
-import com.example.vlados.crm.db.models.User
-import com.example.vlados.crm.ui.fragment.ReviewsFragment
-import com.example.vlados.crm.ui.fragment.UserFragment
-import com.example.vlados.crm.ui.fragment.getReviewFragment
-import com.example.vlados.crm.ui.fragment.getUsersFragment
+import com.example.vlados.crm.ui.fragment.*
 import com.example.vlados.crm.ui.holders.DiscountsHolderFragment
 import com.example.vlados.crm.ui.holders.GoodsAndShopsHolder
 import com.example.vlados.crm.ui.holders.GoodsShopsHolder
 import com.example.vlados.crm.ui.holders.getDiscountsHolderFragment
 import com.example.vlados.crm.utils.getCurrentUser
-import com.example.vlados.crm.utils.saveCurrentUser
 import kotlinx.android.synthetic.main.activity_navigation.*
 
 private const val ROLE_KEY = "role_key"
@@ -35,6 +30,7 @@ fun Context.NavigationActivity(role: String): Intent {
 }
 
 class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, Navigator {
+  
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +59,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
 //        val user = User(role = roleStr)
 //        saveCurrentUser(user)
         
-        nav_view.getHeaderView(0).findViewById<TextView>(R.id.name).text = getCurrentUser()?.fullname
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.name).text = getCurrentUser()?.fullName
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.role).text = getString(mapToTitleId[roleStr]!!)
         
         nav_view.setCheckedItem(R.id.nav_honor)
@@ -84,7 +80,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
                 showHonorBoard()
             }
             R.id.nav_chat -> {
-            
+                showDialogs()
             }
             R.id.nav_sales -> {
                 showSales()
@@ -103,6 +99,20 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+    
+    private fun showDialogs(){
+        val tag = DialogsFragment::class.java.name
+        var fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null && fragment.isAdded) {
+            return
+        }
+        fragment = getDialogsFragmnet()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, tag)
+                .commit()
+        toolbar.title = getString(R.string.title_dialogs)
+    }
+
     
     private fun showHonorBoard() {
         val tag = ReviewsFragment::class.java.name

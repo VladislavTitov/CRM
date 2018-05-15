@@ -16,15 +16,14 @@
 
         <TextView
             android:id="@+id/userInstanceName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:lines="1"
-            android:textColor="@color/grey_text_color"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/grey_text_color"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Настя Ермолаева" />
@@ -45,6 +44,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userInstanceName"
             tools:text="Кассир" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/blockUserImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/userInstanceStatus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_block_black_24dp" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

@@ -16,7 +16,7 @@ class ReviewsPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<R
         ApiMethods.get.getAllReviews().observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     reviews = it
-                    viewState.setItems(it)
+                    viewState.setItems(reviews)
                 }, {
                     it.printStackTrace()
                     navigator?.showSnack("Error!")
@@ -26,7 +26,7 @@ class ReviewsPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<R
     fun save(review: Review) {
         ApiMethods.post.postReview(review.userId, review).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    addItem(review)
+                    addItem(it)
                 }, {
                     it.printStackTrace()
                     navigator?.showSnack("Error!")

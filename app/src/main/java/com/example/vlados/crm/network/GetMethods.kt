@@ -12,7 +12,7 @@ interface GetMethods {
     
     @GET("users")
     fun getAllUsers(): Single<List<User>>
-
+    
     @GET("users")
     fun getRoledUsers(@Query("role") role: String): Single<List<User>>
     
@@ -24,4 +24,14 @@ interface GetMethods {
     
     @GET("discounts")
     fun getAllDiscounts(): Single<List<Discount>>
+    
+    @GET("messages")
+    fun getAllFromMessages(@Query("from") from: Long?): Single<List<Message>>
+    
+    @GET("messages")
+    fun getAllToMessages(@Query("to") to: Long?): Single<List<Message>>
+    
+    @GET("messages")
+    fun getAllFromToMessages(@Query("to") to: Long?, @Query("from") from: Long?):
+            Single<List<Message>>
 }

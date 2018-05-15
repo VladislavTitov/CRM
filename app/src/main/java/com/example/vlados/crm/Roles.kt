@@ -36,8 +36,8 @@ fun getRoles(context: Context, currentUserRole: String?): List<String> {
     result.add(context.getString(mapToTitleId.get(CASHIER)!!))
 
     if (currentUserRole == ADMIN) {
-        result.add(context.getString(mapToTitleId.get(ADMIN)!!))
         result.add(context.getString(mapToTitleId.get(MANAGER)!!))
+        result.add(context.getString(mapToTitleId.get(ADMIN)!!))
     }
     return result
 }

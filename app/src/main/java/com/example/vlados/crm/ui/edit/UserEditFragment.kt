@@ -14,6 +14,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.EditMvpAppCompatDialogFragment
 import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.common.ShopArrayAdapter
 import com.example.vlados.crm.db.models.Shop
 import com.example.vlados.crm.db.models.User
 import com.example.vlados.crm.getRole
@@ -49,41 +50,27 @@ class UserEditFragment : EditMvpAppCompatDialogFragment(), UserEditInterface {
     
     
     override fun setShops(items: List<Shop>, dialogView: View) {
-        this.shops = items
-        
-        val companyAdapter = ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_dropdown_item, shops?.map { it.name })
-        dialogView.userEditShop.adapter = companyAdapter
-        dialogView.userEditShop.setSelection(companyAdapter.getPosition(user?.shop))
+        val shopsAdapter = ShopArrayAdapter(context, items)
+        dialogView.userEditShop.adapter = shopsAdapter
+        dialogView.userEditShop.setSelection(shopsAdapter.getPosition(user?.shop?.id))
     }
     
     override fun checkCorrectness(view: View): Boolean {
         var result = true
         val message = getString(R.string.empty_error_text)
-        if (isEmpty(view.userEditName)) {
-            setError(view.userEditName, message)
-            result = false
-        }
+        
         if (isEmpty(view.userEditEmail)) {
             setError(view.userEditEmail, message)
             result = false
         }
-        if (isEmpty(view.userEditSurname)) {
-            setError(view.userEditSurname, message)
+        if (isEmpty(view.userEditFullName)) {
+            setError(view.userEditFullName, message)
             result = false
         }
         if (isEmpty(view.userEditPassword)) {
             setError(view.userEditPassword, message)
             result = false
         }
-//        if (isEmpty(view.userEditAddress)) {
-//            setError(view.userEditAddress, message)
-//            result = false
-//        }
-//        if (isEmpty(view.userEditStore)) {
-//            setError(view.userEditStore, message)
-//            result = false
-//        }
         if (isEmpty(view.userEditUsername)) {
             setError(view.userEditUsername, message)
             result = false
@@ -111,14 +98,10 @@ class UserEditFragment : EditMvpAppCompatDialogFragment(), UserEditInterface {
     
     private fun bindUser(view: View) {
         user = arguments?.getParcelable<User>(USER_KEY)
-        view.userEditName.setText(user?.name)
-        view.userEditSurname.setText(user?.surname)
-//        view.userEditAddress.setText(user?.address)
+        view.userEditFullName.setText(user?.fullName)
         view.userEditEmail.setText(user?.email)
         view.userEditPassword.setText(user?.password)
         view.userEditUsername.setText(user?.username)
-//        view.userEditStore.setText(user?.shop)
-        
         
         val roleAdapter = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_dropdown_item, getRoles(context,
@@ -154,12 +137,14 @@ class UserEditFragment : EditMvpAppCompatDialogFragment(), UserEditInterface {
         if (user == null)
             user = User()
         user?.email = getFromEdit(view.userEditEmail)
-        user?.name = getFromEdit(view.userEditName)
-        user?.surname = getFromEdit(view.userEditSurname)
-        user?.shop = view.userEditShop.selectedItem.toString()
+        user?.fullName = getFromEdit(view.userEditFullName)
         user?.password = getFromEdit(view.userEditPassword)
         user?.username = getFromEdit(view.userEditUsername)
         user?.role = getRole(context, view.userEditRole.selectedItem.toString())
+        user?.blocked = view.userEditBlocked.isChecked
+        val shop = view.userEditShop.selectedItem as Shop
+        user?.shop = shop
+        
     }
     
     

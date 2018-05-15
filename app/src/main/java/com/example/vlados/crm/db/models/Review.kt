@@ -9,14 +9,18 @@ import com.google.gson.annotations.SerializedName
  */
 data class Review(val id: Int? = null,
                   var content: String,
-                  @SerializedName("user_id") var userId: Int,
-                  @SerializedName("reviewer_id") var reviewUserId: Int) : Parcelable {
+                  @SerializedName("user_id") var userId: Long? = null,
+                  @SerializedName("reviewer_id") var reviewUserId: Long? = null,
+                  var reviewer: User? = null,
+                  @SerializedName("reviewed_user") var reviewedUser: User? = null) : Parcelable {
     
     constructor(source: Parcel) : this(
             source.readValue(Int::class.java.classLoader) as Int?,
             source.readString(),
-            source.readInt(),
-            source.readInt()
+            source.readValue(Long::class.java.classLoader) as Long?,
+            source.readValue(Long::class.java.classLoader) as Long?,
+            source.readParcelable<User>(User::class.java.classLoader),
+            source.readParcelable<User>(User::class.java.classLoader)
     )
     
     override fun describeContents() = 0
@@ -24,8 +28,10 @@ data class Review(val id: Int? = null,
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeValue(id)
         writeString(content)
-        writeInt(userId)
-        writeInt(reviewUserId)
+        writeValue(userId)
+        writeValue(reviewUserId)
+        writeParcelable(reviewer, 0)
+        writeParcelable(reviewedUser, 0)
     }
     
     companion object {

@@ -20,7 +20,7 @@ class UsersArrayAdapter(context: Context, private val accounts: List<User>) : Ar
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.item_spinner_user, parent, false)
         val acc = accounts[position]
-        view.fullname.text = acc.getFullName()
+        view.fullname.text = acc.fullName
         view.login.text = acc.username
         return view
     }

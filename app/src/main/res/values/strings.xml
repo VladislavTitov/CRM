@@ -47,18 +47,16 @@
     <string name="store_label">Shop</string>
     <string name="address_label">Address</string>
     <string name="email_label">Email</string>
-    <string name="password_label">Password</string>
-    <string name="name_label">Name</string>
-    <string name="surname_label">Surname</string>
-    <string name="job_label">Status</string>
+    <string name="password_label">Пароль</string>
+    <string name="name_label">Имя</string>
+    <string name="surname_label">Фамилия</string>
+    <string name="job_label">Статус</string>
 
-    <!--<string name="button_main_label">Главная</string>-->
-
-    <!--Discounts label-->
-    <string name="sale_for_one_label">For 1 good</string>
-    <string name="sale_for_all_label">For all purchase</string>
-    <string name="sale_for_percent_label">Percents</string>
-    <string name="sale_for_amount_label">Amount</string>
+    <string name="button_main_label">Главная</string>
+    <string name="sale_for_one_label">На 1 товар</string>
+    <string name="sale_for_all_label">На всю покупку</string>
+    <string name="sale_for_percent_label">Проценты</string>
+    <string name="sale_for_amount_label">Количетсвенно</string>
     <string name="sale_amout_label">руб.</string>
     <string name="sale_percent_label">%</string>
     <string name="from_label">From</string>
@@ -89,6 +87,8 @@
     <string name="good_price">Price</string>
     <string name="good_kind">Kind</string>
     <string name="good_sizes">Sizes</string>
+    <string name="block">Block</string>
+    <string name="title_dialogs">Dialogs</string>
 
 
 </resources>

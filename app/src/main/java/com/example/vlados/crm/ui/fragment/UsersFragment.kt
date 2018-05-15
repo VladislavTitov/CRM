@@ -117,17 +117,18 @@ class UserFragment : NavMvpAppCompatFragment(), ItemInterface<User> {
                     { oldPosition, newPosition ->
                         val oldItem = users[oldPosition]
                         val newItem = aNew[newPosition]
-                        oldItem.name == newItem.name &&
+                        oldItem.fullName == newItem.fullName &&
                                 oldItem.address == newItem.address &&
                                 oldItem.email == newItem.email &&
                                 oldItem.password == newItem.password &&
-                                oldItem.surname == newItem.surname &&
-                                oldItem.shop == newItem.shop
+                                oldItem.shop == newItem.shop &&
+                                oldItem.blocked == newItem.blocked
                     }
             )
             val result = DiffUtil.calculateDiff(diffUtilsCallback, false)
             users = aNew
             result.dispatchUpdatesTo(this)
+            notifyDataSetChanged()
         }
         
         inner class UserHolder(override val containerView: View) :
@@ -136,8 +137,13 @@ class UserFragment : NavMvpAppCompatFragment(), ItemInterface<User> {
             
             fun bind(user: User, position: Int) {
                 
-                userInstanceName.text = user.getFullName()
+                userInstanceName.text = user.fullName
                 userInstanceStatus.text = getRoleTitle(context, user.role)
+                
+                
+                when (user.blocked) {
+                    true -> blockUserImage.visibility = View.VISIBLE
+                }
                 
                 containerView.setOnClickListener {
                     onClick(user)

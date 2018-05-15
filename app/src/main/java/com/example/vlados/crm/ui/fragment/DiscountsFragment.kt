@@ -77,9 +77,7 @@ class DiscountsFragment : NavMvpAppCompatFragment(), ItemInterface<Discount> {
     
     
     override fun changeFab() {
-        if (arguments.getBoolean(APPROVED_KEY))
-            navigator?.hibeFab()
-        else navigator?.setFabClickListener { onFabClick() }
+        navigator?.setFabClickListener { onFabClick() }
     }
     
     
@@ -147,6 +145,7 @@ class DiscountsFragment : NavMvpAppCompatFragment(), ItemInterface<Discount> {
             
             fun bind(discount: Discount, position: Int) {
                 itemSaleTitle.text = discount.formTitle()
+                itemSaleInfo.text = discount.getInfo()
                 
                 containerView.setOnClickListener { onFabClick(discount) }
             }

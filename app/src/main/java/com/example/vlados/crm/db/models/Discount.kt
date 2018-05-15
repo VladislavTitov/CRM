@@ -4,12 +4,13 @@ package com.example.vlados.crm.db.models
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 data class Discount(val id: Int? = null,
-                    var from: Date? = null,
-                    var to: Date? = null,
+                    @SerializedName("valid_from") var from: Date? = null,
+                    @SerializedName("valid_to") var to: Date? = null,
                     @SerializedName("discount_type") var type: String = "percents",
                     var value: String = "0",
                     var approved: Boolean = false,
@@ -22,6 +23,13 @@ data class Discount(val id: Int? = null,
             else -> " руб."
         }
         return result
+    }
+    
+    fun getInfo(): String {
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy")
+        if (from == null || to == null )
+            return ""
+        return "С ${dateFormat.format(from)} до ${dateFormat.format(to)}"
     }
     
     constructor(source: Parcel) : this(
