@@ -108,6 +108,9 @@ class UserEditFragment : EditMvpAppCompatDialogFragment(), UserEditInterface {
                 context.getCurrentUser()?.role))
         view.userEditRole.adapter = roleAdapter
         view.userEditRole.setSelection(getRoleIndex(user?.role))
+        when (user?.blocked){
+            true -> view.userEditBlocked.setChecked(true)
+        }
     }
     
     

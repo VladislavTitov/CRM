@@ -128,7 +128,6 @@ class UserFragment : NavMvpAppCompatFragment(), ItemInterface<User> {
             val result = DiffUtil.calculateDiff(diffUtilsCallback, false)
             users = aNew
             result.dispatchUpdatesTo(this)
-            notifyDataSetChanged()
         }
         
         inner class UserHolder(override val containerView: View) :
@@ -143,6 +142,7 @@ class UserFragment : NavMvpAppCompatFragment(), ItemInterface<User> {
                 
                 when (user.blocked) {
                     true -> blockUserImage.visibility = View.VISIBLE
+                    else -> blockUserImage.visibility = View.GONE
                 }
                 
                 containerView.setOnClickListener {

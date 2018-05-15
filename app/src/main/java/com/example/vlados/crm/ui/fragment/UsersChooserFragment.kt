@@ -95,7 +95,7 @@ class UsersChooserFragment : MvpAppCompatDialogFragment(), ItemInterface<User> {
                 .replace(R.id.container, fragment, tag)
                 .addToBackStack(DialogsFragment::class.java.name)
                 .commit()
-        activity.toolbar?.title  = user?.fullName
+        activity.toolbar?.title  = user.fullName
         dismiss()
     }
     

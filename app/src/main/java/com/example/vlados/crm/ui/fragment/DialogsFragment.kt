@@ -68,6 +68,7 @@ class DialogsFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
     
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity.toolbar?.title = getString(R.string.title_dialogs)
         init()
     }
     
@@ -79,7 +80,7 @@ class DialogsFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
         dialogsRecycleView.adapter = messageAdapter
         layoutManager = LinearLayoutManager(context)
         dialogsRecycleView.layoutManager = layoutManager
-        presenter.onReady(context.getCurrentUser()?.id)
+        presenter.onDialogReady(context.getCurrentUser()?.id)
     }
     
     override fun changeFab() {
@@ -109,7 +110,7 @@ class DialogsFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
                 .replace(R.id.container, fragment, tag)
                 .addToBackStack(DialogsFragment::class.java.name)
                 .commit()
-        activity.toolbar?.title  = dialogUser?.fullName
+        activity.toolbar?.title = dialogUser?.fullName
     }
     
     
@@ -156,11 +157,17 @@ class DialogsFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
             
             fun bind(dialog: Message, position: Int) {
                 
-                interlocutorName.text = dialog.sender?.fullName
                 
-                var temp = when (dialog.sender?.id) {
-                    currentUser?.id -> "Я"
-                    else -> dialog.sender?.fullName
+                var temp: String?
+                when (dialog.sender?.id) {
+                    currentUser?.id -> {
+                        temp = "Я"
+                        interlocutorName.text = dialog.receiver?.fullName
+                    }
+                    else -> {
+                        temp = dialog.sender?.fullName
+                        interlocutorName.text = dialog.sender?.fullName
+                    }
                 }
                 lastMessage.text = temp + ": ${dialog.body}"
                 

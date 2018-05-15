@@ -31,18 +31,18 @@ fun GoodsFragment.getGoodEditDialog(good: Good? = null): GoodEditFragment {
 }
 
 class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
-
+    
     @InjectPresenter
     lateinit var presenter: GoodEditPresenter
     lateinit var layout: View
     var editObserver: EditObserver? = null
     var good: Good? = null
-
+    
     @ProvidePresenter
     fun providePresenter(): GoodEditPresenter {
         return GoodEditPresenter(arguments.getBoolean(NEW_KEY))
     }
-
+    
     override fun checkCorrectness(view: View): Boolean {
         var result = true
         val message = getString(R.string.empty_error_text)
@@ -65,26 +65,26 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
         }
         return result
     }
-
+    
     override fun save(view: View) {
-       if(checkCorrectness(view)){
-           presenter.onSave(good?.id, view.name.text.toString(), view.price.text.toString().toInt(), view.kind.text.toString())
-       }
-        presenter.onSave(good?.id,
-                view.name.text.toString(),
-                view.price.text.toString().toInt(),
-                view.kind.text.toString(),
-                view.sizes.text.toString())
+        if (checkCorrectness(view)) {
+            presenter.onSave(good?.id,
+                    view.name.text.toString(),
+                    view.price.text.toString().toInt(),
+                    view.kind.text.toString(),
+                    view.sizes.text.toString())
+        }
+        
     }
-
+    
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         editObserver = (parentFragment as EditObserver)
     }
-
+    
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         layout = LayoutInflater.from(context).inflate(R.layout.dialog_edit_good, null)
-
+        
         val builder = AlertDialog.Builder(context)
         with(builder, {
             setView(layout)
@@ -103,7 +103,7 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
         bind(layout)
         return builder.create()
     }
-
+    
     fun bind(view: View) {
         good = arguments?.getParcelable<Good>(GOOD_KEY)
         view.name.setText(good?.name)
@@ -111,7 +111,7 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
         view.kind.setText(good?.kind)
         view.sizes.setText(good?.sizes)
     }
-
+    
     override fun showLoading(isShown: Boolean) {
         if (isShown) {
             layout.form.visibility = View.GONE
@@ -121,13 +121,13 @@ class GoodEditFragment : EditMvpAppCompatDialogFragment(), GoodEditInterface {
             layout.progress.visibility = View.GONE
         }
     }
-
+    
     override fun showMessage(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
-
+    
     override fun notifyObserver() {
         editObserver?.onEditEnd()
-
+        
     }
 }
