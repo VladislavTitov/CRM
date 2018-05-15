@@ -13,6 +13,8 @@ import android.widget.DatePicker
 import android.widget.EditText
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.vlados.crm.ADMIN
+import com.example.vlados.crm.MANAGER
 import com.example.vlados.crm.R
 import com.example.vlados.crm.common.EditMvpAppCompatDialogFragment
 import com.example.vlados.crm.common.GoodsArrayAdapter
@@ -21,16 +23,19 @@ import com.example.vlados.crm.db.models.Discount
 import com.example.vlados.crm.db.models.Good
 import com.example.vlados.crm.presenters.DiscountEditInterface
 import com.example.vlados.crm.presenters.DiscountEditPresenter
+import com.example.vlados.crm.utils.getCurrentUser
 import kotlinx.android.synthetic.main.fragment_discounts_edit.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 const val SALE_KEY = "sale_key"
+private const val APPROVED_KEY = "approved_key"
 
-fun Context.getDiscountEditFragment(discount: Discount? = null): DialogFragment {
+fun Context.getDiscountEditFragment(discount: Discount? = null, approved: Boolean = false): DialogFragment {
     val fragment = DiscountEditFragment()
     val args = Bundle()
+    args.putBoolean(APPROVED_KEY, approved)
     args.putParcelable(SALE_KEY, discount)
     fragment.arguments = args
     return fragment
@@ -188,11 +193,13 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
         val builder = AlertDialog.Builder(activity)
         with(builder) {
             setView(view)
-            setPositiveButton(R.string.offer_label, object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                
-                }
-            })
+            if (context.getCurrentUser()?.role == ADMIN || !arguments.getBoolean(APPROVED_KEY)) {
+                setPositiveButton(R.string.offer_label, object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+
+                    }
+                })
+            }
             setNegativeButton(R.string.cancel_label, object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                     this@DiscountEditFragment.dialog.cancel()
@@ -202,7 +209,9 @@ class DiscountEditFragment : EditMvpAppCompatDialogFragment(), DiscountEditInter
         
         bindDiscount(view)
         val dialog = builder.create()
-        dialog.setOnShowListener { changePosButton(view) }
+        if (context.getCurrentUser()?.role == ADMIN || !arguments.getBoolean(APPROVED_KEY)) {
+            dialog.setOnShowListener { changePosButton(view) }
+        }
         presenter.onItemsReady(view)
         return dialog
     }

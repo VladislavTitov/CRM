@@ -51,7 +51,7 @@ class DiscountsFragment : NavMvpAppCompatFragment(), ItemInterface<Discount> {
     }
     
     public fun onFabClick(discount: Discount? = null) {
-        context.getDiscountEditFragment(discount).show(childFragmentManager, "");
+        context.getDiscountEditFragment(discount, arguments.getBoolean(APPROVED_KEY)).show(childFragmentManager, "");
     }
     
     
