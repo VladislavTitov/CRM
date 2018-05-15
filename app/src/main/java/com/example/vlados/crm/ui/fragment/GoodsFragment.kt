@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -145,6 +146,19 @@ class GoodsFragment : NavMvpAppCompatFragment(), ItemInterface<Good>, EditObserv
                 if (onItemClickListener(item)) {
                     onItemChange(position)
                 }
+            }
+            itemView.setOnLongClickListener {
+                val menu = PopupMenu(context, it)
+                menu.inflate(R.menu.item_menu)
+                menu.setOnMenuItemClickListener {
+                    if (it.itemId == R.id.delete) {
+                        item.id?.let { it1 -> presenter.deleteGood(it1) }
+                        return@setOnMenuItemClickListener true
+                    }
+                    return@setOnMenuItemClickListener false
+                }
+                menu.show()
+                return@setOnLongClickListener true
             }
         }
 

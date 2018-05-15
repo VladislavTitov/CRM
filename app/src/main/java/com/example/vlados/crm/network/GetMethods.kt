@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface GetMethods {
     
     @GET("goods")
-    fun getAllGoods(): Single<List<Good>>
+    fun getAllGoods(): Single<MutableList<Good>>
     
     @GET("users")
     fun getAllUsers(): Single<List<User>>
