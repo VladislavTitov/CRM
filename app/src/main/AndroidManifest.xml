@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vlados.crm">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,13 +24,17 @@
         <activity
             android:name=".ui.NavigationActivity"
             android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <provider
-            android:authorities="com.example.vlados.crm"
             android:name=".db.CRMContentProvider"
-            android:exported="false"/>
+            android:authorities="com.example.vlados.crm"
+            android:exported="false" />
+
+        <service
+            android:name=".ui.fragment.MessageService"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
     </application>
 
 </manifest>

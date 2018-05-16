@@ -1,7 +1,12 @@
 package com.example.vlados.crm.ui.fragment
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
@@ -38,6 +43,30 @@ class DialogsFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
     
     var navigator: Navigator? = null
     var currentUser: User? = null
+    val messageReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == "com.example.vlados.crm.MESSAGES_RECEIVED") {
+                presenter.onDialogReady(currentUser?.id)
+            }
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        context.registerReceiver(messageReceiver,
+                IntentFilter("com.example.vlados.crm.MESSAGES_RECEIVED"))
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        context.unregisterReceiver(messageReceiver)
+    }
+    
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MessageService.receive(context)
+    }
     
     @InjectPresenter
     lateinit var presenter: MessagesPresenter

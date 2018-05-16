@@ -149,6 +149,7 @@ class ReviewsFragment : NavMvpAppCompatFragment(), ItemInterface<Review> {
             reviews = aNew
             result.dispatchUpdatesTo(this)
             layoutManager?.scrollToPosition(reviews.size - 1)
+          
         }
         
         inner class ReviewHolder(override val containerView: View) :

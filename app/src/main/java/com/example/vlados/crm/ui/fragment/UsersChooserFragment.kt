@@ -22,6 +22,7 @@ import com.example.vlados.crm.common.Navigator
 import com.example.vlados.crm.db.models.User
 import com.example.vlados.crm.getRoleTitle
 import com.example.vlados.crm.presenters.UsersPresenter
+import com.example.vlados.crm.utils.getCurrentUser
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.fragment_dialog_users.view.*
@@ -57,7 +58,7 @@ class UsersChooserFragment : MvpAppCompatDialogFragment(), ItemInterface<User> {
         return UsersPresenter(navigator)
     }
     
-
+    
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         
         val inflater = LayoutInflater.from(context)
@@ -74,14 +75,14 @@ class UsersChooserFragment : MvpAppCompatDialogFragment(), ItemInterface<User> {
             })
         }
         usersChoserChooserAdapter = UsersChooserAdapter(view)
-        view.chooserUserRecycleView.layoutManager =  LinearLayoutManager(context)
+        view.chooserUserRecycleView.layoutManager = LinearLayoutManager(context)
         view.chooserUserRecycleView.adapter = usersChoserChooserAdapter
         presenter.onReady()
         return builder.create()
     }
     
     override fun setItems(items: List<User>) {
-        usersChoserChooserAdapter.setItems(items)
+        usersChoserChooserAdapter.setItems(items.filter { user -> user.id != context.getCurrentUser()?.id })
     }
     
     fun onClick(user: User) {
@@ -95,7 +96,7 @@ class UsersChooserFragment : MvpAppCompatDialogFragment(), ItemInterface<User> {
                 .replace(R.id.container, fragment, tag)
                 .addToBackStack(DialogsFragment::class.java.name)
                 .commit()
-        activity.toolbar?.title  = user.fullName
+        activity.toolbar?.title = user.fullName
         dismiss()
     }
     
@@ -161,7 +162,7 @@ class UsersChooserFragment : MvpAppCompatDialogFragment(), ItemInterface<User> {
     
 }
 
-fun Context.getUserChooserFragment():DialogFragment{
+fun Context.getUserChooserFragment(): DialogFragment {
     val fragment = UsersChooserFragment()
     return fragment
 }
