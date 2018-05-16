@@ -89,7 +89,7 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
                 showAccounts()
             }
             R.id.nav_reports -> {
-            
+                showReports()
             }
             R.id.nav_goods_and_shops -> {
                 showGoodsAndShops()
@@ -164,6 +164,19 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
                 .replace(R.id.container, fragment, tag)
                 .commit()
         toolbar.title = getString(R.string.title_goods_and_shops)
+    }
+
+    private fun showReports() {
+        val tag = ReportsFragment::class.java.name
+        var fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null && fragment.isAdded) {
+            return
+        }
+        fragment = getReportsFragment()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.container, fragment, tag)
+                .commit()
+        toolbar.title = getString(R.string.title_reports)
     }
     
     override fun setFabClickListener(l: (view: View) -> Unit) {

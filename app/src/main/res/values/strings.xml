@@ -38,6 +38,7 @@
     <string name="title_goods_and_shops">Goods and shops</string>
     <string name="title_goods">Goods</string>
     <string name="title_shops">Shops</string>
+    <string name="title_dialogs">Dialogs</string>
 
     <string name="offered_sales_title">Offered</string>
     <string name="approved_sales_title">Approved</string>
@@ -88,7 +89,12 @@
     <string name="good_kind">Kind</string>
     <string name="good_sizes">Sizes</string>
     <string name="block">Block</string>
-    <string name="title_dialogs">Dialogs</string>
+
+    <!--Reports labels-->
+    <string name="show_report">Show</string>
+    <string name="from_date">From</string>
+    <string name="to_date">To</string>
+    <string name="choose_report_interval">Choose interval</string>
 
 
 </resources>

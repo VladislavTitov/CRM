@@ -31,6 +31,7 @@
     <string name="title_goods_and_shops">Товары и магазины</string>
     <string name="title_goods">Товары</string>
     <string name="title_shops">Магазины</string>
+    <string name="title_dialogs">Диалоги</string>
 
     <string name="offered_sales_title">В процессе</string>
     <string name="approved_sales_title">Одобренные</string>
@@ -81,5 +82,11 @@
     <string name="good_kind">Тип</string>
     <string name="good_sizes">Размеры</string>
     <string name="block">Блокировать</string>
-    <string name="title_dialogs">Диалоги</string>
+
+    <!--Reports labels-->
+    <string name="show_report">Показать</string>
+    <string name="from_date">С</string>
+    <string name="to_date">По</string>
+    <string name="choose_report_interval">Выберете интервал</string>
+
 </resources>
