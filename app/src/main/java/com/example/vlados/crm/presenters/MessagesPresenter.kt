@@ -16,36 +16,57 @@ class MessagesPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<
     var messages: List<Message> = mutableListOf()
     
     fun onDialogReady(userId: Long?) {
+        messagesMap = mutableMapOf<Long?, List<Message>>()
+        var i = 0
         ApiMethods.get.getAllFromMessages(userId).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     sortMessages(it, userId)
-                    sortForDialog()
-                    viewState.setItems(dialogMessages)
+                    i++
+                    if (i == 2) {
+                      setDialogs()
+                    }
                 }, {
                     it.printStackTrace()
                 })
         ApiMethods.get.getAllToMessages(userId).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     sortMessages(it, userId)
-                    sortForDialog()
-                    viewState.setItems(dialogMessages)
+                    i++
+                    if (i == 2) {
+                        setDialogs()
+                    }
                 }, {
                     it.printStackTrace()
                 })
     }
     
+    private fun setDialogs(){
+        sortForDialog()
+        viewState.setItems(dialogMessages.sortedByDescending{ message -> message.id })
+    }
+    
+    private fun setMessages(){
+        viewState.setItems(messages.sortedBy{ message -> message.id })
+    }
+    
     fun getMessagesWithUser(currentId: Long?, dialogId: Long?) {
+        messages = mutableListOf()
+        var i = 0
         ApiMethods.get.getAllFromToMessages(currentId, dialogId).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     messages += it
-                    viewState.setItems(messages)
+                    i++
+                    if (i == 2)
+                       setMessages()
                 }, {
                     it.printStackTrace()
                 })
         ApiMethods.get.getAllFromToMessages(dialogId, currentId).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     messages += it
-                    viewState.setItems(messages)
+                    i++
+                    if (i == 2)
+                      setMessages()
                 }, {
                     it.printStackTrace()
                 })
@@ -65,7 +86,7 @@ class MessagesPresenter(val navigator: Navigator?) : MvpPresenter<ItemInterface<
     private fun sortForDialog() {
         dialogMessages = mutableListOf()
         for (entry in messagesMap) {
-            val list = entry.value.sortedBy { message -> message.id }
+            val list = entry.value.sortedBy{ message -> message.id }
             dialogMessages += list[list.size - 1]
         }
     }

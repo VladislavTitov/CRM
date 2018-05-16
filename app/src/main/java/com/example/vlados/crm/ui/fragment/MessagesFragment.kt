@@ -1,8 +1,14 @@
 package com.example.vlados.crm.ui.fragment
 
 import android.app.Activity
-import android.content.Context
+import android.app.job.JobInfo
+import android.app.job.JobParameters
+import android.app.job.JobScheduler
+import android.app.job.JobService
+import android.content.*
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.util.DiffUtil
@@ -36,7 +42,7 @@ import kotlinx.android.synthetic.main.item_message.*
  * Created by Daria Popova on 15.05.18.
  */
 
-fun Context.getMessagesFragment(user: User?): Fragment {
+fun Context.getMessagesFragment(user: User? = null): Fragment {
     val fragment = MessagesFragment()
     val args = Bundle()
     args.putParcelable(USER_KEY, user)
@@ -50,6 +56,30 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
     var currentUser: User? = null
     var dialogUser: User? = null
     var width: Int = 0
+    val messageReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == "com.example.vlados.crm.MESSAGES_RECEIVED") {
+                presenter.getMessagesWithUser(currentUser?.id, dialogUser?.id)
+            }
+        }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        context.registerReceiver(messageReceiver,
+                IntentFilter("com.example.vlados.crm.MESSAGES_RECEIVED"))
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        context.unregisterReceiver(messageReceiver)
+    }
+    
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MessageService.receive(context)
+    }
     
     @InjectPresenter
     lateinit var presenter: MessagesPresenter
@@ -141,6 +171,7 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MessagesHolder {
             val view = LayoutInflater.from(parent?.context)
                     .inflate(R.layout.item_message, parent, false)
+            view.minimumWidth = width
             return MessagesHolder(view)
         }
         
@@ -167,9 +198,9 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
                     }
             )
             val result = DiffUtil.calculateDiff(diffUtilsCallback, false)
-            dialogs = aNew
-            dialogs.sortedBy { message -> message.id }
             result.dispatchUpdatesTo(this)
+            dialogs = aNew
+            notifyDataSetChanged()
             layoutManager?.scrollToPosition(dialogs.size - 1)
         }
         
@@ -179,26 +210,24 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
             
             fun bind(message: Message, position: Int) {
                 
-                messageText.minimumWidth = width
-                
+               
                 messageText.text = message.body
-                
                 val params = messageText.getLayoutParams() as RelativeLayout.LayoutParams
                 
                 
-                
                 when (message.sender?.id) {
-    
-                    currentUser?.id  -> {
+                    
+                    currentUser?.id -> {
                         messageText.background = ContextCompat.getDrawable(context, R.drawable.receive_message_background)
                         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
                     }
-                    else-> {
+                    else -> {
                         messageText.background = ContextCompat.getDrawable(context, R.drawable.sent_message_background)
                         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT)
                     }
                 }
                 messageText.layoutParams = params
+                messageText.minimumWidth = width
             }
             
             
@@ -206,4 +235,29 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
         
     }
     
+    
+}
+
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+public class MessageService() : JobService() {
+    
+    companion object {
+        fun receive(context: Context) {
+            val messageService = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+            val builder = JobInfo.Builder(1,
+                    ComponentName(context, MessageService::class.java))
+            builder.setPeriodic(5000)
+            messageService.schedule(builder.build())
+        }
+    }
+    
+    override fun onStartJob(params: JobParameters): Boolean {
+        sendBroadcast(Intent("com.example.vlados.crm.MESSAGES_RECEIVED"))
+        receive(this)
+        return true
+    }
+    
+    override fun onStopJob(params: JobParameters): Boolean {
+        return true
+    }
 }
