@@ -14,4 +14,10 @@
             android:title="@string/title_chat" />
     </group>
 
+    <item
+        android:id="@+id/exit"
+        android:title="@string/exit_label"
+        android:icon="@drawable/ic_exit"
+        />
+
 </menu>

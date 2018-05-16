@@ -44,6 +44,13 @@ fun Context.saveCurrentUser(user: User) {
     editor.apply()
 }
 
+fun Context.deleteCurrentUser() {
+    val sp = PreferenceManager.getDefaultSharedPreferences(this)
+    val editor = sp.edit()
+    editor.putString(USER_KEY, null)
+    editor.apply()
+}
+
 fun Context.getApplicationName(): String {
     val applicationInfo = this.applicationInfo
     val stringId = applicationInfo.labelRes

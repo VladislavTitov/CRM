@@ -24,16 +24,16 @@ class LoginPresenter(val context: Context) : MvpPresenter<LoginInterface>(){
         subscription = ApiMethods.post.login(LoginRequest(login, password))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it.role != null) {
+                    if (it.role != null && it.blocked == false) {
                         context.saveCurrentUser(it)
                         viewState.goToMainActivity(it.role!!)
                     } else {
-                        viewState.showProgress(true)
-                        viewState.showMessage("Пользователь не валиден!")
+                        viewState.showProgress(false)
+                        viewState.showMessage("Пользователь заблокирован!")
                     }
                 }, {
                     it.printStackTrace()
-                    viewState.showProgress(true)
+                    viewState.showProgress(false)
                     viewState.showMessage("Error!")
                 })
     }

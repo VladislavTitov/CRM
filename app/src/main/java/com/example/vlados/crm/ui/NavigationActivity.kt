@@ -13,11 +13,13 @@ import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.example.vlados.crm.*
 import com.example.vlados.crm.common.Navigator
+import com.example.vlados.crm.sigin.LoginActivity
 import com.example.vlados.crm.ui.fragment.*
 import com.example.vlados.crm.ui.holders.DiscountsHolderFragment
 import com.example.vlados.crm.ui.holders.GoodsAndShopsHolder
 import com.example.vlados.crm.ui.holders.GoodsShopsHolder
 import com.example.vlados.crm.ui.holders.getDiscountsHolderFragment
+import com.example.vlados.crm.utils.deleteCurrentUser
 import com.example.vlados.crm.utils.getCurrentUser
 import kotlinx.android.synthetic.main.activity_navigation.*
 
@@ -93,6 +95,9 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
             }
             R.id.nav_goods_and_shops -> {
                 showGoodsAndShops()
+            }
+            R.id.exit -> {
+                exit()
             }
         }
         
@@ -191,5 +196,16 @@ class NavigationActivity : MvpAppCompatActivity(), NavigationView.OnNavigationIt
     
     override fun showSnack(text: String) {
         Snackbar.make(container, text, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun exit() {
+        deleteCurrentUser()
+        goToLoginActivity()
+        finish()
+    }
+
+    private fun goToLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

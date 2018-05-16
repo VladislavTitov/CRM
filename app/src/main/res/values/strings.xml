@@ -81,6 +81,7 @@
     <string name="save_label">Save</string>
     <string name="cancel_label">Cancel</string>
     <string name="empty_error_text">Specify this field</string>
+    <string name="exit_label">Exit</string>
 
     <!--Good edit labels-->
     <string name="change_good_label">Change good</string>

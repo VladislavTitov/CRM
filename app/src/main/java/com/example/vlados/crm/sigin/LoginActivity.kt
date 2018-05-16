@@ -10,12 +10,15 @@ import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.vlados.crm.CASHIER
 import com.example.vlados.crm.R
 import com.example.vlados.crm.ui.NavigationActivity
 import com.example.vlados.crm.utils.afterTextChanged
+import com.example.vlados.crm.utils.getCurrentUser
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -39,6 +42,11 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        val currentUser = getCurrentUser()
+        if (currentUser != null) {
+            goToMainActivity(currentUser.role ?: CASHIER)
+        }
 
         // Set up the login form.
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
@@ -167,7 +175,8 @@ class LoginActivity : MvpAppCompatActivity(), LoginInterface{
     }
 
     override fun showMessage(text: String) {
-        Snackbar.make(login_layout, text, Snackbar.LENGTH_LONG)
+//        Snackbar.make(login_layout, text, Snackbar.LENGTH_LONG).show()
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
     }
 
 }

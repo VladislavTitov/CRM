@@ -74,6 +74,7 @@
     <string name="save_label">Сохранить</string>
     <string name="cancel_label">Отмена</string>
     <string name="empty_error_text">Заполните это поле</string>
+    <string name="exit_label">Выход</string>
 
     <!--Good edit labels-->
     <string name="change_good_label">Изменить товар</string>
