@@ -166,7 +166,7 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
     
     inner class MessagesAdapter() : RecyclerView.Adapter<MessagesAdapter.MessagesHolder>() {
         
-        var dialogs = listOf<Message>()
+        var messages = listOf<Message>()
         
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MessagesHolder {
             val view = LayoutInflater.from(parent?.context)
@@ -176,21 +176,21 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
         }
         
         override fun getItemCount(): Int {
-            return dialogs.size
+            return messages.size
         }
         
         override fun onBindViewHolder(holder: MessagesHolder?, position: Int) {
-            holder?.bind(dialogs[position], position)
+            holder?.bind(messages[position], position)
         }
         
         
         fun setItems(aNew: List<Message>) {
-            val diffUtilsCallback = GenericDiffUtilsCallback<Message>(dialogs, aNew,
+            val diffUtilsCallback = GenericDiffUtilsCallback<Message>(messages, aNew,
                     { oldPosition, newPosition ->
-                        dialogs[oldPosition].id == aNew[newPosition].id
+                        messages[oldPosition].id == aNew[newPosition].id
                     },
                     { oldPosition, newPosition ->
-                        val oldItem = dialogs[oldPosition]
+                        val oldItem = messages[oldPosition]
                         val newItem = aNew[newPosition]
                         oldItem.receiver == newItem.receiver &&
                                 oldItem.body == newItem.body &&
@@ -199,9 +199,8 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
             )
             val result = DiffUtil.calculateDiff(diffUtilsCallback, false)
             result.dispatchUpdatesTo(this)
-            dialogs = aNew
-            notifyDataSetChanged()
-            layoutManager?.scrollToPosition(dialogs.size - 1)
+            messages = aNew
+            layoutManager?.scrollToPosition(messages.size - 1)
         }
         
         inner class MessagesHolder(override val containerView: View) :
@@ -226,8 +225,8 @@ class MessagesFragment : NavMvpAppCompatFragment(), ItemInterface<Message> {
                         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT)
                     }
                 }
+                params.width = width
                 messageText.layoutParams = params
-                messageText.minimumWidth = width
             }
             
             
